@@ -26,7 +26,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-namespace Encog\MathUtil\Matrices\decomposition;
+namespace Encog\MathUtil\Matrices\Decomposition;
 
 use Encog\MathUtil\Matrices\Matrix;
 use Encog\MathUtil\Matrices\MatrixError;

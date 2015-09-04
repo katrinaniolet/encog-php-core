@@ -31,11 +31,11 @@ namespace Test\Encog\matrix;
 use \Encog\MathUtil\Matrices;
 use \Encog\MathUtil\Matrices\Matrix;
 use \Encog\MathUtil\Matrices\MatrixError;
-use \Encog\MathUtil\Matrices\decomposition\CholeskyDecomposition;
+use \Encog\MathUtil\Matrices\Decomposition\CholeskyDecomposition;
 
 require_once ("MathUtil/Matrices/Matrix.php");
 require_once ("MathUtil/Matrices/MatrixMath.php");
-require_once ("MathUtil/Matrices/decompisition/CholeskyDecomposition.php");
+require_once ("MathUtil/Matrices/Decompisition/CholeskyDecomposition.php");
 class TestDecomp extends \PHPUnit_Framework_TestCase {
 
 	public function testCholesky() {
