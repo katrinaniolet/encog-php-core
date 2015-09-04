@@ -82,7 +82,13 @@ class CholeskyDecomposition {
 		// Initialize.
 		$a = $matrix->getData();
 		$this->n = $matrix->getRows();
-		$this->l = array();
+		$this->l = new \ArrayObject();
+		for($r=0; $r<$this->n; ++$r) {
+			$this->l[$r] = new \ArrayObject();
+			for($c=0;$c<$this->n;++$c) {
+				$this->l[$r][$c] = 0.0;
+			}
+		}
 		$this->isspd = ($matrix->getCols() == $this->n);
 		// Main loop.
 		for( $j = 0; $j < $this->n; ++$j ) {
@@ -123,7 +129,7 @@ class CholeskyDecomposition {
 	 * @return L
 	 */
 	public function getL() {
-		return Matrix::matrixFromDoubles( $this->l );
+		return Matrix::matrixFromDoubles( $this->l->getArrayCopy() );
 	}
 
 	/**
@@ -147,7 +153,7 @@ class CholeskyDecomposition {
 		$nx = $b->getCols();
 		
 		// Solve L*Y = B;
-		for( $k = 0; $k < $n; ++$k ) {
+		for( $k = 0; $k < $this->n; ++$k ) {
 			for( $j = 0; $j < $nx; ++$j ) {
 				for( $i = 0; $i < $k; ++$i ) {
 					$x[$k][$j] -= $x[$i][$j] * $this->l[$k][$i];

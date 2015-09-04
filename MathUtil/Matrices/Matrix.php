@@ -248,7 +248,7 @@ class Matrix {
 	 * @return A COPY of this matrix as a 2d array.
 	 */
 	public function getArrayCopy() {
-		return clone( $this->matrix );
+		return $this->matrix;
 	}
 
 	/**
