@@ -84,19 +84,16 @@ function add( Matrix $a, Matrix $b ) {
  *        	target
  *        	The target matrix for the copy.
  */
-/*
- * public static void copy(final Matrix source, final Matrix target) {
- * final double[][] s = source.getData();
- * final double[][] t = target.getData();
- *
- * for (int row = 0; row < source.getRows(); row++) {
- * for (int col = 0; col < source.getCols(); col++) {
- * t[row][col] = s[row][col];
- * }
- * }
- *
- * }
- */
+function copy( Matrix $source, Matrix &$target ) {
+	$s = $source->getData();
+	$t = $target->getData();
+	for( $row = 0; $row < $source->getRows(); ++$row ) {
+		for( $col = 0; $col < $source->getCols(); ++$col ) {
+			$t[$row][$col] = $s[$row][$col];
+		}
+	}
+	$target = Matrix::matrixFromDoubles($t);
+}
 
 /**
  * Delete one column from the matrix.
@@ -129,7 +126,7 @@ function deleteCol( Matrix $matrix, $deleted ) {
 			}
 		}
 	}
-	return Matrix::matrixFromDoubles($newMatrix);
+	return Matrix::matrixFromDoubles( $newMatrix );
 }
 
 /**

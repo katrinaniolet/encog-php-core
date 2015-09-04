@@ -295,15 +295,18 @@ class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 		}
 		catch( MatrixError $e ) {}
 	}
-	
-	/*
-	 * public void testCopy()
-	 * {
-	 * double data[][] = {{1.0,2.0},{3.0,4.0}};
-	 * Matrix source = new Matrix(data);
-	 * Matrix target = new Matrix(2,2);
-	 * MatrixMath.copy(source, target);
-	 * TestCase.assertTrue(source.equals(target));
-	 * }
-	 */
+
+	public function testCopy() {
+		$data = [ 
+				[ 
+						1.0,
+						2.0 ],
+				[ 
+						3.0,
+						4.0 ] ];
+		$source = Matrix::matrixFromDoubles( $data );
+		$target = new Matrix( 2, 2 );
+		MatrixMath\copy( $source, $target );
+		$this->assertTrue( $source->equals( $target ) );
+	}
 }
