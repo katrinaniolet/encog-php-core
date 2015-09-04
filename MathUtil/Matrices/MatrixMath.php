@@ -152,31 +152,24 @@ function add( Matrix $a, Matrix $b ) {
  *        	Which row to delete.
  * @return A new matrix with the specified row deleted.
  */
-/*
- * public static Matrix deleteRow(final Matrix matrix, final int deleted) {
- *
- * if (deleted >= matrix.getRows()) {
- * throw new MatrixError("Can't delete row " + deleted
- * + " from matrix, it only has " + matrix.getRows()
- * + " rows.");
- *
- * }
- * final double[][] newMatrix = new double[matrix.getRows() - 1][matrix
- * .getCols()];
- * final double[][] d = matrix.getData();
- *
- * int targetRow = 0;
- * for (int row = 0; row < matrix.getRows(); row++) {
- * if (row != deleted) {
- * for (int col = 0; col < matrix.getCols(); col++) {
- * newMatrix[targetRow][col] = d[row][col];
- * }
- * targetRow++;
- * }
- * }
- * return new Matrix(newMatrix);
- * }
- */
+function deleteRow( Matrix $matrix, $deleted ) {
+	if( $deleted >= $matrix->getRows() ) {
+		throw new MatrixError( "Can't delete row " + $deleted + " from matrix, it only has " + $matrix->getRows() + " rows." );
+	}
+	$newMatrix = array();
+	$d = $matrix->getData();
+	
+	$targetRow = 0;
+	for( $row = 0; $row < $matrix->getRows(); ++$row ) {
+		if( $row != $deleted ) {
+			for( $col = 0; $col < $matrix->getCols(); ++$col ) {
+				$newMatrix[$targetRow][$col] = $d[$row][$col];
+			}
+			++$targetRow;
+		}
+	}
+	return Matrix::matrixFromDoubles( $newMatrix );
+}
 
 /**
  * Return a matrix with each cell divided by the specified value.
@@ -262,20 +255,17 @@ function dotProduct( Matrix $a, Matrix $b ) {
  *        	is always square.
  * @return An identity matrix.
  */
-
-function identity($size) {
-if ($size < 1) {
-throw new MatrixError("Identity matrix must be at least of "
-+ "size 1.");
+function identity( $size ) {
+	if( $size < 1 ) {
+		throw new MatrixError( "Identity matrix must be at least of " + "size 1." );
+	}
+	$result = new Matrix( $size, $size );
+	$d = $result->getData();
+	for( $i = 0; $i < $size; ++$i ) {
+		$d[$i][$i] = 1;
+	}
+	return Matrix::matrixFromDoubles( $d );
 }
-$result = new Matrix($size, $size);
-$d = $result->getData();
-for($i = 0; $i < $size; ++$i) {
-$d[$i][$i] = 1;
-}
-return Matrix::matrixFromDoubles($d);
-}
-
 
 /**
  * Return the result of multiplying every cell in the matrix by the
@@ -289,16 +279,15 @@ return Matrix::matrixFromDoubles($d);
  *        	The second matrix.
  * @return The result of the multiplication.
  */
-
 function multiplyScalar( Matrix $a, $b ) {
-$result = array();
-$d = $a->getData();
-for ($row = 0; $row < $a->getRows(); ++$row) {
-for ($col = 0; $col < $a->getCols(); ++$col) {
-$result[$row][$col] = $d[$row][$col] * $b;
-}
-}
-return Matrix::matrixFromDoubles($result);
+	$result = array();
+	$d = $a->getData();
+	for( $row = 0; $row < $a->getRows(); ++$row ) {
+		for( $col = 0; $col < $a->getCols(); ++$col ) {
+			$result[$row][$col] = $d[$row][$col] * $b;
+		}
+	}
+	return Matrix::matrixFromDoubles( $result );
 }
 
 /**
