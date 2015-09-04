@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit>
+  <testsuites>
+    <testsuite name="matrix">
+      <file>test/matrix/TestMatrix.php</file>
+      <file>test/matrix/TextBiPolarUtil.php</file>
+      <file>test/matrix/TestMatrixMath.php</file>
+    </testsuite>
+  </testsuites>
+</phpunit>
