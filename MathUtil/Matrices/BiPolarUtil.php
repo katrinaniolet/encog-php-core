@@ -27,7 +27,7 @@
  */
 
 
-namespace Encog\MathUtil\Matrices;
+namespace Encog\MathUtil\Matrices\BiPolarUtil;
 
 /// <summary>
 /// This class contains a number of utility methods used to work
@@ -35,162 +35,160 @@ namespace Encog\MathUtil\Matrices;
 /// numbers. The value of true is defined to be one, where as false is defined to
 /// be negative one.
 /// </summary>
-class BiPolarUtil {
 
-	/// <summary>
-	/// Convert binary to bipolar, true is 1 and false is -1.
-	/// </summary>
-	/// <param name="b">The binary value.</param>
-	/// <returns>The bipolar value.</returns>
-	public static function Bipolar2double( $b )
+/// <summary>
+/// Convert binary to bipolar, true is 1 and false is -1.
+/// </summary>
+/// <param name="b">The binary value.</param>
+/// <returns>The bipolar value.</returns>
+public static function Bipolar2double( $b )
+{
+	if( $b > 0 )
 	{
-		if( $b > 0 )
-		{
-			return 1;
-		}
-		else
-		{
-			return -1;
-		}
+		return 1;
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+/// <summary>
+/// Convert a boolean array to bipolar, true is 1 and false is -1.
+/// </summary>
+/// <param name="b">The binary array to convert.</param>
+/// <returns></returns>
+public static function Bipolar2double( $b )
+{
+	$result = array(count($b));
+
+	for($i = 0; $i < count($b); ++$i)
+	{
+		$result[$i] = Bipolar2double($b[$i]);
 	}
 
-	/// <summary>
-	/// Convert a boolean array to bipolar, true is 1 and false is -1.
-	/// </summary>
-	/// <param name="b">The binary array to convert.</param>
-	/// <returns></returns>
-	public static function Bipolar2double( $b )
+	return $result;
+}
+
+/// <summary>
+/// Convert a 2D boolean array to bipolar, true is 1 and false is -1.
+/// </summary>
+/// <param name="b">The 2D array to convert.</param>
+/// <returns>A bipolar array.</returns>
+public static function Bipolar2double( $b )
+{
+	$result = array( count($b) );
+
+	for( $row = 0; $row < count( $b ); ++$row )
 	{
-		$result = array(count($b));
-
-		for($i = 0; $i < count($b); ++$i)
+		$result[row] = array(count($b[$row]));
+		for( $col = 0; $col < count($b[$row]); ++$col )
 		{
-			$result[$i] = Bipolar2double($b[$i]);
-		}
-
-		return $result;
-	}
-
-	/// <summary>
-	/// Convert a 2D boolean array to bipolar, true is 1 and false is -1.
-	/// </summary>
-	/// <param name="b">The 2D array to convert.</param>
-	/// <returns>A bipolar array.</returns>
-	public static function Bipolar2double( $b )
-	{
-		$result = array( count($b) );
-
-		for( $row = 0; $row < count( $b ); ++$row )
-		{
-			$result[row] = array(count($b[$row]));
-			for( $col = 0; $col < count($b[$row]); ++$col )
-			{
-				$result[$row][$col] = Bipolar2double($b[$row][$col]);
-			}
-		}
-
-		return $result;
-	}
-
-	/// <summary>
-	/// Convert biploar to boolean, true is 1 and false is -1.
-	/// </summary>
-	/// <param name="d">A bipolar value.</param>
-	/// <returns>A boolean value.</returns>
-	public static function Double2bipolar( $d )
-	{
-		if( $d > 0 )
-		{
-			return true;
-		}
-		else
-		{
-			return false;
+			$result[$row][$col] = Bipolar2double($b[$row][$col]);
 		}
 	}
 
-	/// <summary>
-	/// Convert a bipolar array to a boolean array, true is 1 and false is -1.
-	/// </summary>
-	/// <param name="d">A bipolar array.</param>
-	/// <returns>A boolean array.</returns>
-	public static function Double2bipolar( $d )
-	{
-		$result = array( count($d) );
+	return $result;
+}
 
-		for( $i = 0; $i < count( $d ); ++$i )
+/// <summary>
+/// Convert biploar to boolean, true is 1 and false is -1.
+/// </summary>
+/// <param name="d">A bipolar value.</param>
+/// <returns>A boolean value.</returns>
+public static function Double2bipolar( $d )
+{
+	if( $d > 0 )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+/// <summary>
+/// Convert a bipolar array to a boolean array, true is 1 and false is -1.
+/// </summary>
+/// <param name="d">A bipolar array.</param>
+/// <returns>A boolean array.</returns>
+public static function Double2bipolar( $d )
+{
+	$result = array( count($d) );
+
+	for( $i = 0; $i < count( $d ); ++$i )
+	{
+		$result[$i] = Double2bipolar( $d[$i] );
+	}
+
+	return $result;
+}
+
+/// <summary>
+/// Convert a 2D bipolar array to a boolean array, true is 1 and false is -1.
+/// </summary>
+/// <param name="d">A 2D bipolar array.</param>
+/// <returns>A 2D boolean array.</returns>
+public static function Double2bipolar( $d )
+{
+	$result = array( count( $d ) );
+
+	for( $row = 0; $row < count($d); ++$row )
+	{
+		$result[$row] = array( $d[$row] );
+		for( $col = 0; $col < count($d[$row]); ++$col )
 		{
-			$result[$i] = Double2bipolar( $d[$i] );
-		}
-
-		return $result;
-	}
-
-	/// <summary>
-	/// Convert a 2D bipolar array to a boolean array, true is 1 and false is -1.
-	/// </summary>
-	/// <param name="d">A 2D bipolar array.</param>
-	/// <returns>A 2D boolean array.</returns>
-	public static function Double2bipolar( $d )
-	{
-		$result = array( count( $d ) );
-
-		for( $row = 0; $row < count($d); ++$row )
-		{
-			$result[$row] = array( $d[$row] );
-			for( $col = 0; $col < count($d[$row]); ++$col )
-			{
-				$result[$row][$col] = Double2bipolar($d[$row][$col]);
-			}
-		}
-
-		return $result;
-	}
-
-	/// <summary>
-	/// Normalize a binary number.  Greater than 0 becomes 1, zero and below are false.
-	/// </summary>
-	/// <param name="d">A binary number in a double.</param>
-	/// <returns>A double that will be 0 or 1.</returns>
-	public static function NormalizeBinary( $d )
-	{
-		if( $d > 0 )
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
+			$result[$row][$col] = Double2bipolar($d[$row][$col]);
 		}
 	}
 
-	/// <summary>
-	/// Convert a single number from bipolar to binary.
-	/// </summary>
-	/// <param name="d">a bipolar number.</param>
-	/// <returns>A binary number.</returns>
-	public static function ToBinary( $d )
-	{
-		return ($d + 1)/2.0;
-	}
+	return $result;
+}
 
-	/// <summary>
-	/// Convert a number to bipolar.
-	/// </summary>
-	/// <param name="d">A binary number.</param>
-	/// <returns></returns>
-	public static function ToBiPolar( $d )
+/// <summary>
+/// Normalize a binary number.  Greater than 0 becomes 1, zero and below are false.
+/// </summary>
+/// <param name="d">A binary number in a double.</param>
+/// <returns>A double that will be 0 or 1.</returns>
+public static function NormalizeBinary( $d )
+{
+	if( $d > 0 )
 	{
-		return (2*NormalizeBinary($d)) - 1;
+		return 1;
 	}
+	else
+	{
+		return 0;
+	}
+}
 
-	/// <summary>
-	/// Normalize a number and convert to binary.
-	/// </summary>
-	/// <param name="d">A bipolar number.</param>
-	/// <returns>A binary number stored as a double</returns>
-	public static function ToNormalizedBinary( $d )
-	{
-		return NormalizeBinary(ToBinary(d));
-	}
+/// <summary>
+/// Convert a single number from bipolar to binary.
+/// </summary>
+/// <param name="d">a bipolar number.</param>
+/// <returns>A binary number.</returns>
+public static function ToBinary( $d )
+{
+	return ($d + 1)/2.0;
+}
+
+/// <summary>
+/// Convert a number to bipolar.
+/// </summary>
+/// <param name="d">A binary number.</param>
+/// <returns></returns>
+public static function ToBiPolar( $d )
+{
+	return (2*NormalizeBinary($d)) - 1;
+}
+
+/// <summary>
+/// Normalize a number and convert to binary.
+/// </summary>
+/// <param name="d">A bipolar number.</param>
+/// <returns>A binary number stored as a double</returns>
+public static function ToNormalizedBinary( $d )
+{
+	return NormalizeBinary(ToBinary(d));
 }
