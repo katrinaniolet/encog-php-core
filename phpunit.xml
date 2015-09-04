@@ -5,6 +5,7 @@
       <file>test/matrix/TestMatrix.php</file>
       <file>test/matrix/TextBiPolarUtil.php</file>
       <file>test/matrix/TestMatrixMath.php</file>
+      <file>test/matrix/TestDecomp.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
