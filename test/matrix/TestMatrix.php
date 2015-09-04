@@ -34,7 +34,7 @@ use Encog\MathUtil\Matrices\Matrix;
 use Encog\MathUtil\Matrices\MatrixError;
 use Encog\MathUtil\Matrices\MatrixMath;
 
-class TestMatrix extends PHPUnit_Framework_TestCase
+class TestMatrix extends \PHPUnit_Framework_TestCase
 {
 
 	public function testRowsAndCols() {
