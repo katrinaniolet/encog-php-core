@@ -33,9 +33,8 @@ use \Encog\MathUtil\Matrices\Matrix;
 use \Encog\MathUtil\Matrices\MatrixError;
 use \Encog\MathUtil\Matrices\MatrixMath;
 
-require_once("MathUtil/Matrices/Matrix.php");
-require_once("MathUtil/Matrices/MatrixMath.php");
-
+require_once ("MathUtil/Matrices/Matrix.php");
+require_once ("MathUtil/Matrices/MatrixMath.php");
 class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 	public function testInverse() {
 		$matrixData1 = [ 
@@ -62,59 +61,62 @@ class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $matrix2->equals( $checkMatrix ) );
 	}
 	
-	/*
-	 * public void testDotProduct() throws Throwable
-	 * {
-	 * double matrixData1[][] = {{1,2,3,4}};
-	 * double matrixData2[][] = {{5},
-	 * {6},
-	 * {7},
-	 * {8}
-	 * };
-	 *
-	 * Matrix matrix1 = new Matrix(matrixData1);
-	 * Matrix matrix2 = new Matrix(matrixData2);
-	 *
-	 * double dotProduct = MatrixMath.dotProduct(matrix1,matrix2);
-	 *
-	 * TestCase.assertEquals(dotProduct, 70.0);
-	 *
-	 * // test dot product errors
-	 * double nonVectorData[][] = {{1.0,2.0},{3.0,4.0}};
-	 * double differentLengthData[][] = {{1.0}};
-	 * Matrix nonVector = new Matrix(nonVectorData);
-	 * Matrix differentLength = new Matrix(differentLengthData);
-	 *
-	 * try
-	 * {
-	 * MatrixMath.dotProduct(matrix1, nonVector);
-	 * TestCase.assertTrue(false);
-	 * }
-	 * catch(MatrixError e)
-	 * {
-	 * }
-	 *
-	 * try
-	 * {
-	 * MatrixMath.dotProduct(nonVector, matrix2);
-	 * TestCase.assertTrue(false);
-	 * }
-	 * catch(MatrixError e)
-	 * {
-	 * }
-	 *
-	 * try
-	 * {
-	 * MatrixMath.dotProduct(matrix1, differentLength);
-	 * TestCase.assertTrue(false);
-	 * }
-	 * catch(MatrixError e)
-	 * {
-	 * }
-	 *
-	 *
-	 * }
-	 */
+	public function testDotProduct() {
+		$matrixData1 = [ 
+				[ 
+						1,
+						2,
+						3,
+						4 ] ];
+		$matrixData2 = [ 
+				[ 
+						5 ],
+				[ 
+						6 ],
+				[ 
+						7 ],
+				[ 
+						8 ] ];
+		
+		$matrix1 = Matrix::matrixFromDoubles( $matrixData1 );
+		$matrix2 = Matrix::matrixFromDoubles( $matrixData2 );
+		
+		$dotProduct = MatrixMath\dotProduct( $matrix1, $matrix2 );
+		
+		$this->assertEquals( $dotProduct, 70.0 );
+		
+		// test dot product errors
+		$nonVectorData = [ 
+				[ 
+						1.0,
+						2.0 ],
+				[ 
+						3.0,
+						4.0 ] ];
+		$differentLengthData = [ 
+				[ 
+						1.0 ] ];
+		$nonVector = Matrix::matrixFromDoubles( $nonVectorData );
+		$differentLength = Matrix::matrixFromDoubles( $differentLengthData );
+		
+		try {
+			MatrixMath\dotProduct( $matrix1, $nonVector );
+			$this->assertTrue( false );
+		}
+		catch( MatrixError $e ) {}
+		
+		try {
+			MatrixMath\dotProduct( $nonVector, $matrix2 );
+			$this->assertTrue( false );
+		}
+		catch( MatrixError $e ) {}
+		
+		try {
+			MatrixMath\dotProduct( $matrix1, $differentLength );
+			$this->assertTrue( false );
+		}
+		catch( MatrixError $e ) {}
+	}
 	
 	/*
 	 * public void testMultiply() throws Throwable
