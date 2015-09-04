@@ -111,33 +111,26 @@ function add( Matrix $a, Matrix $b ) {
  *        	The column to delete.
  * @return A matrix with the column deleted.
  */
-/*
- * public static Matrix deleteCol(final Matrix matrix, final int deleted) {
- * if (deleted >= matrix.getCols()) {
- * throw new MatrixError("Can't delete column " + deleted
- * + " from matrix, it only has " + matrix.getCols()
- * + " columns.");
- * }
- * final double[][] newMatrix = new double[matrix.getRows()][matrix
- * .getCols() - 1];
- *
- * final double[][] d = matrix.getData();
- *
- * for (int row = 0; row < matrix.getRows(); row++) {
- * int targetCol = 0;
- *
- * for (int col = 0; col < matrix.getCols(); col++) {
- * if (col != deleted) {
- * newMatrix[row][targetCol] = d[row][col];
- * targetCol++;
- * }
- *
- * }
- *
- * }
- * return new Matrix(newMatrix);
- * }
- */
+function deleteCol( Matrix $matrix, $deleted ) {
+	if( $deleted >= $matrix->getCols() ) {
+		throw new MatrixError( "Can't delete column " + $deleted + " from matrix, it only has " + $matrix->getCols() + " columns." );
+	}
+	$newMatrix = array();
+	
+	$d = $matrix->getData();
+	
+	for( $row = 0; $row < $matrix->getRows(); ++$row ) {
+		$targetCol = 0;
+		
+		for( $col = 0; $col < $matrix->getCols(); ++$col ) {
+			if( $col != $deleted ) {
+				$newMatrix[$row][$targetCol] = $d[$row][$col];
+				++$targetCol;
+			}
+		}
+	}
+	return Matrix::matrixFromDoubles($newMatrix);
+}
 
 /**
  * Delete a row from the matrix.

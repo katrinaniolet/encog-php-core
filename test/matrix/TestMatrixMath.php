@@ -270,27 +270,31 @@ class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 		}
 		catch( MatrixError $e ) {}
 	}
-	
-	/*
-	 * public void testDeleteCol() throws Throwable
-	 * {
-	 * double origData[][] = {{1.0,2.0},{3.0,4.0}};
-	 * double checkData[][] = {{2.0},{4.0}};
-	 * Matrix orig = new Matrix(origData);
-	 * Matrix matrix = MatrixMath.deleteCol(orig, 0);
-	 * Matrix check = new Matrix(checkData);
-	 * TestCase.assertTrue(check.equals(matrix));
-	 *
-	 * try
-	 * {
-	 * MatrixMath.deleteCol(orig, 10);
-	 * TestCase.assertTrue(false);
-	 * }
-	 * catch(MatrixError e)
-	 * {
-	 * }
-	 * }
-	 */
+
+	public function testDeleteCol() {
+		$origData = [ 
+				[ 
+						1.0,
+						2.0 ],
+				[ 
+						3.0,
+						4.0 ] ];
+		$checkData = [ 
+				[ 
+						2.0 ],
+				[ 
+						4.0 ] ];
+		$orig = Matrix::matrixFromDoubles( $origData );
+		$matrix = MatrixMath\deleteCol( $orig, 0 );
+		$check = Matrix::matrixFromDoubles( $checkData );
+		$this->assertTrue( $check->equals( $matrix ) );
+		
+		try {
+			MatrixMath\deleteCol( $orig, 10 );
+			$this->assertTrue( false );
+		}
+		catch( MatrixError $e ) {}
+	}
 	
 	/*
 	 * public void testCopy()
