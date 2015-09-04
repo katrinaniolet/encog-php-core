@@ -159,45 +159,62 @@ class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 		$result = MatrixMath\multiply( $matrix1, $matrix2 );
 		$this->assertTrue( $result->equals( $matrix3 ) );
 	}
-	
-	/*
-	 * public static void testVerifySame()
-	 * {
-	 * double dataBase[][] = {{1.0,2.0},{3.0,4.0}};
-	 * double dataTooManyRows[][] = {{1.0,2.0},{3.0,4.0},{5.0,6.0}};
-	 * double dataTooManyCols[][] = {{1.0,2.0,3.0},{4.0,5.0,6.0}};
-	 * Matrix base = new Matrix(dataBase);
-	 * Matrix tooManyRows = new Matrix(dataTooManyRows);
-	 * Matrix tooManyCols = new Matrix(dataTooManyCols);
-	 * MatrixMath.add(base, base);
-	 * try
-	 * {
-	 * MatrixMath.add(base, tooManyRows);
-	 * TestCase.assertFalse(true);
-	 * }
-	 * catch(MatrixError e)
-	 * {
-	 * }
-	 * try
-	 * {
-	 * MatrixMath.add(base, tooManyCols);
-	 * TestCase.assertFalse(true);
-	 * }
-	 * catch(MatrixError e)
-	 * {
-	 * }
-	 * }
-	 */
-	
-	/*
-	 * public void testDivide() throws Throwable
-	 * {
-	 * double data[][] = {{2.0,4.0},{6.0,8.0}};
-	 * Matrix matrix = new Matrix(data);
-	 * Matrix result = MatrixMath.divide(matrix, 2.0);
-	 * TestCase.assertEquals(1.0, result.get(0,0));
-	 * }
-	 */
+
+	public function testVerifySame() {
+		$dataBase = [ 
+				[ 
+						1.0,
+						2.0 ],
+				[ 
+						3.0,
+						4.0 ] ];
+		$dataTooManyRows = [ 
+				[ 
+						1.0,
+						2.0 ],
+				[ 
+						3.0,
+						4.0 ],
+				[ 
+						5.0,
+						6.0 ] ];
+		$dataTooManyCols = [ 
+				[ 
+						1.0,
+						2.0,
+						3.0 ],
+				[ 
+						4.0,
+						5.0,
+						6.0 ] ];
+		$base = Matrix::matrixFromDoubles( $dataBase );
+		$tooManyRows = Matrix::matrixFromDoubles( $dataTooManyRows );
+		$tooManyCols = Matrix::matrixFromDoubles( $dataTooManyCols );
+		MatrixMath\add( $base, $base );
+		try {
+			MatrixMath\add( $base, $tooManyRows );
+			$this->assertFalse( true );
+		}
+		catch( MatrixError $e ) {}
+		try {
+			MatrixMath\add( $base, $tooManyCols );
+			$this->assertFalse( true );
+		}
+		catch( MatrixError $e ) {}
+	}
+
+	public function testDivide() {
+		$data = [ 
+				[ 
+						2.0,
+						4.0 ],
+				[ 
+						6.0,
+						8.0 ] ];
+		$matrix = Matrix::matrixFromDoubles( $data );
+		$result = MatrixMath\divide( $matrix, 2.0 );
+		$this->assertEquals( 1.0, $result->get( 0, 0 ) );
+	}
 	
 	/*
 	 * public void testIdentity() throws Throwable

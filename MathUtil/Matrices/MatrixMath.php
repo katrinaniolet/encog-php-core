@@ -189,18 +189,16 @@ function add( Matrix $a, Matrix $b ) {
  *        	The value to divide by.
  * @return A new matrix with the division performed.
  */
-/*
- * public static Matrix divide(final Matrix a, final double b) {
- * final double[][] result = new double[a.getRows()][a.getCols()];
- * final double[][] d = a.getData();
- * for (int row = 0; row < a.getRows(); row++) {
- * for (int col = 0; col < a.getCols(); col++) {
- * result[row][col] = d[row][col] / b;
- * }
- * }
- * return new Matrix(result);
- * }
- */
+function divide( Matrix $a, $b ) {
+	$result = array();
+	$d = $a->getData();
+	for( $row = 0; $row < $a->getRows(); ++$row ) {
+		for( $col = 0; $col < $a->getCols(); ++$col ) {
+			$result[$row][$col] = $d[$row][$col] / $b;
+		}
+	}
+	return Matrix::matrixFromDoubles( $result );
+}
 
 /**
  * Compute the dot product for the two matrixes.
