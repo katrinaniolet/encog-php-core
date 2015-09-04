@@ -370,27 +370,25 @@ function multiply( Matrix $a, Matrix $b ) {
 		return new Matrix(result);
 	}*/
 
-	/**
-	 * Return the transposition of a matrix.
-	 *
-	 * @param input
-	 *            The matrix to transpose.
-	 * @return The matrix transposed.
-	 */
-	/*public static Matrix transpose(final Matrix input) {
-		final double[][] transposeMatrix = new double[input.getCols()][input
-				.getRows()];
+/**
+ * Return the transposition of a matrix.
+ *
+ * @param $input Matrix The matrix to transpose.
+ * @return Matrix The matrix transposed.
+ */
+function transpose( Matrix $input ) {
+	$transposeMatrix = array();
 
-		final double[][] d = input.getData();
+	$d = $input->getData();
 
-		for (int r = 0; r < input.getRows(); r++) {
-			for (int c = 0; c < input.getCols(); c++) {
-				transposeMatrix[c][r] = d[r][c];
-			}
+	for($r = 0; $r < $input->getRows(); ++$r) {
+		for ($c = 0; $c < $input->getCols(); ++$c) {
+			$transposeMatrix[$c][$r] = $d[$r][$c];
 		}
+	}
 
-		return new Matrix(transposeMatrix);
-	}*/
+	return Matrix::matrixFromDoubles($transposeMatrix);
+}
 
 /**
  * Calculate the length of a vector.
