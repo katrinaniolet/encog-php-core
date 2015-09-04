@@ -215,36 +215,38 @@ class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 		$result = MatrixMath\divide( $matrix, 2.0 );
 		$this->assertEquals( 1.0, $result->get( 0, 0 ) );
 	}
-	
-	/*
-	 * public void testIdentity() throws Throwable
-	 * {
-	 * try
-	 * {
-	 * MatrixMath.identity(0);
-	 * TestCase.assertTrue(false);
-	 * }
-	 * catch(MatrixError e)
-	 * {
-	 *
-	 * }
-	 *
-	 * double checkData[][] = {{1,0},{0,1}};
-	 * Matrix check = new Matrix(checkData);
-	 * Matrix matrix = MatrixMath.identity(2);
-	 * TestCase.assertTrue(check.equals(matrix));
-	 * }
-	 */
-	
-	/*
-	 * public void testMultiplyScalar() throws Throwable
-	 * {
-	 * double data[][] = {{2.0,4.0},{6.0,8.0}};
-	 * Matrix matrix = new Matrix(data);
-	 * Matrix result = MatrixMath.multiply(matrix, 2.0);
-	 * TestCase.assertEquals(4.0, result.get(0,0));
-	 * }
-	 */
+
+	public function testIdentity() {
+		try {
+			MatrixMath\identity( 0 );
+			$this->assertTrue( false );
+		}
+		catch( MatrixError $e ) {}
+		
+		$checkData = [ 
+				[ 
+						1,
+						0 ],
+				[ 
+						0,
+						1 ] ];
+		$check = Matrix::matrixFromDoubles( $checkData );
+		$matrix = MatrixMath\identity( 2 );
+		$this->assertTrue( $check->equals( $matrix ) );
+	}
+
+	public function testMultiplyScalar() {
+		$data = [ 
+				[ 
+						2.0,
+						4.0 ],
+				[ 
+						6.0,
+						8.0 ] ];
+		$matrix = Matrix::matrixFromDoubles( $data );
+		$result = MatrixMath\multiplyScalar( $matrix, 2.0 );
+		$this->assertEquals( 4.0, $result->get( 0, 0 ) );
+	}
 	
 	/*
 	 * public void testDeleteRow() throws Throwable

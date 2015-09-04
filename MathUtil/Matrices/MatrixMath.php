@@ -262,23 +262,20 @@ function dotProduct( Matrix $a, Matrix $b ) {
  *        	is always square.
  * @return An identity matrix.
  */
-/*
- * public static Matrix identity(final int size) {
- * if (size < 1) {
- * throw new MatrixError("Identity matrix must be at least of "
- * + "size 1.");
- * }
- *
- * final Matrix result = new Matrix(size, size);
- * final double[][] d = result.getData();
- *
- * for (int i = 0; i < size; i++) {
- * d[i][i] = 1;
- * }
- *
- * return result;
- * }
- */
+
+function identity($size) {
+if ($size < 1) {
+throw new MatrixError("Identity matrix must be at least of "
++ "size 1.");
+}
+$result = new Matrix($size, $size);
+$d = $result->getData();
+for($i = 0; $i < $size; ++$i) {
+$d[$i][$i] = 1;
+}
+return Matrix::matrixFromDoubles($d);
+}
+
 
 /**
  * Return the result of multiplying every cell in the matrix by the
@@ -292,19 +289,17 @@ function dotProduct( Matrix $a, Matrix $b ) {
  *        	The second matrix.
  * @return The result of the multiplication.
  */
-/*
- * public static Matrix multiply(final Matrix a, final double b) {
- * final double[][] result = new double[a.getRows()][a.getCols()];
- * final double[][] d = a.getData();
- *
- * for (int row = 0; row < a.getRows(); row++) {
- * for (int col = 0; col < a.getCols(); col++) {
- * result[row][col] = d[row][col] * b;
- * }
- * }
- * return new Matrix(result);
- * }
- */
+
+function multiplyScalar( Matrix $a, $b ) {
+$result = array();
+$d = $a->getData();
+for ($row = 0; $row < $a->getRows(); ++$row) {
+for ($col = 0; $col < $a->getCols(); ++$col) {
+$result[$row][$col] = $d[$row][$col] * $b;
+}
+}
+return Matrix::matrixFromDoubles($result);
+}
 
 /**
  * Return the product of the first and second matrix.
@@ -319,7 +314,7 @@ function dotProduct( Matrix $a, Matrix $b ) {
  */
 function multiply( Matrix $a, Matrix $b ) {
 	if( $b->getRows() != $a->getCols() ) {
-		throw new MatrixError( "To use ordinary matrix multiplication the number of " . "columns on the first matrix must mat the number of " . "rows on the second." );
+		throw new MatrixError( "To use ordinary matrix multiplication the number of " . "columns on the first matrix must match the number of " . "rows on the second." );
 	}
 	
 	$aData = $a->getData();
