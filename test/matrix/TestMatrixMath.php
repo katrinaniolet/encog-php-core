@@ -36,6 +36,7 @@ use \Encog\MathUtil\Matrices\MatrixMath;
 require_once ("MathUtil/Matrices/Matrix.php");
 require_once ("MathUtil/Matrices/MatrixMath.php");
 class TestMatrixMath extends \PHPUnit_Framework_TestCase {
+
 	public function testInverse() {
 		$matrixData1 = [ 
 				[ 
@@ -60,7 +61,7 @@ class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 		
 		$this->assertTrue( $matrix2->equals( $checkMatrix ) );
 	}
-	
+
 	public function testDotProduct() {
 		$matrixData1 = [ 
 				[ 
@@ -117,33 +118,47 @@ class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 		}
 		catch( MatrixError $e ) {}
 	}
-	
-	/*
-	 * public void testMultiply() throws Throwable
-	 * {
-	 * double matrixData1[][] = {{1,4},
-	 * {2,5},
-	 * {3,6}
-	 * };
-	 * double matrixData2[][] = {{7,8,9},
-	 * {10,11,12}};
-	 *
-	 *
-	 * double matrixData3[][] = {{47,52,57},
-	 * {64,71,78},
-	 * {81,90,99}
-	 * };
-	 *
-	 * Matrix matrix1 = new Matrix(matrixData1);
-	 * Matrix matrix2 = new Matrix(matrixData2);
-	 *
-	 * Matrix matrix3 = new Matrix(matrixData3);
-	 *
-	 * Matrix result = MatrixMath.multiply(matrix1,matrix2);
-	 *
-	 * TestCase.assertTrue(result.equals(matrix3));
-	 * }
-	 */
+
+	public function testMultiply() {
+		$matrixData1 = [ 
+				[ 
+						1,
+						4 ],
+				[ 
+						2,
+						5 ],
+				[ 
+						3,
+						6 ] ];
+		$matrixData2 = [ 
+				[ 
+						7,
+						8,
+						9 ],
+				[ 
+						10,
+						11,
+						12 ] ];
+		
+		$matrixData3 = [ 
+				[ 
+						47,
+						52,
+						57 ],
+				[ 
+						64,
+						71,
+						78 ],
+				[ 
+						81,
+						90,
+						99 ] ];
+		$matrix1 = Matrix::matrixFromDoubles( $matrixData1 );
+		$matrix2 = Matrix::matrixFromDoubles( $matrixData2 );
+		$matrix3 = Matrix::matrixFromDoubles( $matrixData3 );
+		$result = MatrixMath\multiply( $matrix1, $matrix2 );
+		$this->assertTrue( $result->equals( $matrix3 ) );
+	}
 	
 	/*
 	 * public static void testVerifySame()
