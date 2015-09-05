@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -43,6 +44,7 @@ namespace Encog\ML;
 interface MLProperties extends MLMethod {
 
 	/**
+	 *
 	 * @return array(string,string) A map of all properties.
 	 */
 	public function getProperties();
@@ -50,63 +52,71 @@ interface MLProperties extends MLMethod {
 	/**
 	 * Get the specified property as a double.
 	 *
-	 * @param string name
-	 *            The name of the property.
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
 	 * @return double The property as a double.
-	*/
-	public function getPropertyDouble($name);
+	 */
+	public function getPropertyDouble( $name );
 
 	/**
 	 * Get the specified property as a long.
 	 *
-	 * @param string name
-	 *            The name of the specified property.
+	 * @param
+	 *        	string name
+	 *        	The name of the specified property.
 	 * @return long The value of the specified property.
-	*/
-	public function getPropertyLong($name);
+	 */
+	public function getPropertyLong( $name );
 
 	/**
 	 * Get the specified property as a string.
 	 *
-	 * @param string name
-	 *            The name of the property.
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
 	 * @return string The value of the property.
-	*/
-	public function getPropertyString($name);
+	 */
+	public function getPropertyString( $name );
 
 	/**
 	 * Set a property as a double.
 	 *
-	 * @param string name
-	 *            The name of the property.
-	 * @param double d
-	 *            The value of the property.
-	*/
-	public function setProperty($name, $d);
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
+	 * @param
+	 *        	double d
+	 *        	The value of the property.
+	 */
+	public function setProperty( $name, $d );
 
 	/**
 	 * Set a property as a long.
 	 *
-	 * @param string name
-	 *            The name of the property.
-	 * @param long l
-	 *            The value of the property.
-	*/
-	public function setProperty($name, $l);
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
+	 * @param
+	 *        	long l
+	 *        	The value of the property.
+	 */
+	public function setProperty( $name, $l );
 
 	/**
 	 * Set a property as a double.
 	 *
-	 * @param string name
-	 *            The name of the property.
-	 * @param string value
-	 *            The value of the property.
-	*/
-	public function setProperty($name, $value);
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
+	 * @param
+	 *        	string value
+	 *        	The value of the property.
+	 */
+	public function setProperty( $name, $value );
 
 	/**
 	 * Update any objeccts when a property changes.
-	*/
+	 */
 	public function updateProperties();
-
 }
