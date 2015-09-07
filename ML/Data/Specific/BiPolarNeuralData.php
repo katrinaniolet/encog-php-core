@@ -70,7 +70,7 @@ class BiPolarNeuralData implements MLData {
 	 */
 	public static function fromBooleanArray(array $d) {
 		$ret = new BiPolarNeuralData( count($d) );
-		$ret->setDataFromArray($data);
+		$ret->setDataFromArray($d);
 		return $ret;
 	}
 
@@ -136,7 +136,7 @@ class BiPolarNeuralData implements MLData {
 	public function getData($index = -1) {
 		if($index >= 0 )
 			return BiPolarUtil\bipolar2double($this->data[$index]);
-		return BiPolarUtil.bipolar2double($this->data);
+		return BiPolarUtil\bipolar2double($this->data);
 	}
 
 	/**
@@ -147,8 +147,8 @@ class BiPolarNeuralData implements MLData {
 	 */
 	public function setDataFromArray(array $theData) {
 		if(isset($theData[0]) && is_bool($theData[0]))
-			$this->data = data;
-		if(isset($theData[0]) && is_number($theData[0]))
+			$this->data = $theData;
+		else if(isset($theData[0]) && is_numeric($theData[0]))
 			$this->data = BiPolarUtil\double2bipolar($theData);
 		else
 			throw new MLDataError("Unsupported array type, should be an array of doubles or booleans.");
@@ -194,7 +194,7 @@ class BiPolarNeuralData implements MLData {
 			} else {
 				$result .= 'F';
 			}
-			if ($i != $this0>size() - 1) {
+			if ($i != $this->size() - 1) {
 				$result .= ',';
 			}
 		}

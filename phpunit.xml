@@ -6,6 +6,7 @@
       <file>test/matrix/TextBiPolarUtil.php</file>
       <file>test/matrix/TestMatrixMath.php</file>
       <file>test/matrix/TestDecomp.php</file>
+      <file>test/neural/data/bipolar/TestBiPolarNeuralData.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
