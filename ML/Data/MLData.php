@@ -72,18 +72,12 @@ interface MLData extends CentroidFactory {
 	public function __clone();
 
 	/**
-	 * @return double[] All of the elements as an array.
-	*/
-	public function getData();
-
-	/**
 	 * Get the element specified index value.
 	 *
-	 * @param int index
-	 *            The index to read.
+	 * @param int index The index to read, or -1 to get all data (the default)
 	 * @return double The value at the specified inedx.
 	*/
-	public function getData($index);
+	public function getData($index = -1);
 
 	/**
 	 * Set all of the data as an array of doubles.
@@ -91,7 +85,7 @@ interface MLData extends CentroidFactory {
 	 * @param double[] data
 	 *            An array of doubles.
 	*/
-	public function setData(array $data);
+	public function setDataFromDarray(array $data);
 
 	/**
 	 * Set the specified element.
