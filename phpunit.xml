@@ -7,6 +7,7 @@
       <file>test/matrix/TestMatrixMath.php</file>
       <file>test/matrix/TestDecomp.php</file>
       <file>test/neural/data/bipolar/TestBiPolarNeuralData.php</file>
+      <file>test/neural/activation/TestActivationBiPolar.php</file>
     </testsuite>
   </testsuites>
 </phpunit>

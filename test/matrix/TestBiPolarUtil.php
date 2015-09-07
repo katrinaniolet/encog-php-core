@@ -26,7 +26,7 @@
  * http://www.heatonresearch.com/copyright
  */
 
-namespace Test\Encog\matrix;
+namespace Test\Matrix;
 
 use \Encog\MathUtil\Matrices\BiPolarUtil;
 use \Encog\MathUtil\Matrices\Matrix;
