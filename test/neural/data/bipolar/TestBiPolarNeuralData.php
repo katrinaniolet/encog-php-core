@@ -38,6 +38,7 @@
 namespace Encog\Neural\Data\BiPolar;
 
 use \Encog\ML\Data\Specific\BiPolarNeuralData;
+use Encog\ML\Data\MLDataError;
 
 require_once("ML\Data\Specific\BiPolarNeuralData.php");
 
@@ -54,44 +55,42 @@ class TestBiPolarNeuralData extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(count($data->getData()),2);
 	}
 
-/*	public void testClone()
+	public function testClone()
 	{
-		boolean[] d = { true, false };
-		BiPolarNeuralData data2 = new BiPolarNeuralData(d);
-		BiPolarNeuralData data = (BiPolarNeuralData)data2.clone();
-		Assert.assertEquals("[T,F]",data.toString());
-		Assert.assertEquals(1,data.getData(0),0.5);
-		Assert.assertEquals(-1,data.getData(1),0.5);
-		Assert.assertEquals(true, data.getBoolean(0));
-		Assert.assertEquals(false, data.getBoolean(1));
-		Assert.assertEquals(data.getData().length,2);
-	}*/
+		$d = [ true, false ];
+		$data2 = BiPolarNeuralData::fromBooleanArray($d);
+		$data = clone($data2);
+		$this->assertEquals("[T,F]",$data->toString());
+		$this->assertEquals(1,$data->getData(0),0.5);
+		$this->assertEquals(-1,$data->getData(1),0.5);
+		$this->assertEquals(true, $data->getBoolean(0));
+		$this->assertEquals(false, $data->getBoolean(1));
+		$this->assertEquals(count($data->getData()),2);
+	}
 
-	/*public void testError()
+	public function testError()
 	{
-		BiPolarNeuralData data = new BiPolarNeuralData(2);
-		Assert.assertEquals(2, data.size());
+		$data = new BiPolarNeuralData(2);
+		$this->assertEquals(2, $data->size());
 
 		try
 		{
-			data.add(0, 0);
-			Assert.assertTrue(false);
+			$data->add(0, 0);
+			$this->assertTrue(false);
 		}
-		catch(Exception e)
+		catch(MLDataError $e)
 		{
 		}
-	}*/
+	}
 
-	/*public void testClear()
+	public function testClear()
 	{
-		double[] d = {1,1};
-		BiPolarNeuralData data = new BiPolarNeuralData(2);
-		data.setData(d);
-		data.clear();
-		Assert.assertEquals(-1,data.getData(0),0.5);
-		data.setData(0,true);
-		Assert.assertEquals(true,data.getBoolean(0));
-	}*/
-
-
+		$d = [1,1];
+		$data = new BiPolarNeuralData(2);
+		$data->setDataFromArray($d);
+		$data->clear();
+		$this->assertEquals(-1,$data->getData(0),0.5);
+		$data->setData(0,true);
+		$this->assertEquals(true,$data->getBoolean(0));
+	}
 }

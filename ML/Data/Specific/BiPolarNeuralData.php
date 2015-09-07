@@ -110,7 +110,7 @@ class BiPolarNeuralData implements MLData {
 	 * @return MLData A cloned copy of this object.
 	 */
 	public function __clone() {
-		$result = new BiPolarNeuralData(size());
+		$result = new BiPolarNeuralData($this->size());
 		$result->setDataFromArray( $this->data );
 		return $result;
 	}
