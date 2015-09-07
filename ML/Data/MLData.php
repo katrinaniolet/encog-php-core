@@ -82,10 +82,10 @@ interface MLData extends CentroidFactory {
 	/**
 	 * Set all of the data as an array of doubles.
 	 *
-	 * @param double[] data
-	 *            An array of doubles.
+	 * @param array data
+	 *            An array of values.
 	*/
-	public function setDataFromDarray(array $data);
+	public function setDataFromArray(array $data);
 
 	/**
 	 * Set the specified element.
