@@ -34,7 +34,7 @@ namespace Encog\Util\CSV;
  * separate numbers.
  *
  */
-class CSVFormat extends Threaded {
+class CSVFormat extends \Threaded {
 
 	/**
 	 * Use a decimal point, and a comma to separate numbers.
