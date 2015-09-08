@@ -199,3 +199,6 @@ class CSVFormat extends \Threaded {
 		});
 	}
 }
+
+//instantiate one to initialize the static values
+new CSVFormat();
