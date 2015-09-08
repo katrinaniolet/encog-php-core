@@ -55,7 +55,7 @@ interface ActivationFunction {
 	 *        	int size
 	 *        	The number of values to calculate.
 	 */
-	public function activationFunction( array $d, $start, $size );
+	public function activationFunction( array &$d, $start, $size );
 
 	/**
 	 * Calculate the derivative.

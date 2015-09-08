@@ -47,7 +47,7 @@ function generateActivationFactory($name, ActivationFunction $af) {
 
 		if( $af->getParams()!=null && count($af->getParams())>0 ) {
 			$result .= '[';
-			NumberList::toList(CSVFormat::EG_FORMAT, $result, $af->getParams());
+			NumberList\toList(CSVFormat::EG_FORMAT, $result, $af->getParams());
 			$result .= ']';
 		}
 

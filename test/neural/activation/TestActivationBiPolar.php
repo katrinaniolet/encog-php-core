@@ -44,7 +44,7 @@ class TestActivationBiPolar extends \PHPUnit_Framework_TestCase {
 				0.5,
 				- 0.5 ];
 		
-		$activation->activationFunction( $input, 0, $input->length );
+		$activation->activationFunction( $input, 0, count($input) );
 		
 		$this->assertEquals( 1.0, $input[0], 0.1 );
 		$this->assertEquals( - 1.0, $input[1], 0.1 );
