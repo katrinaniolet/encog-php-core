@@ -77,7 +77,7 @@ function fromList(CSVFormat $format, $str) {
  * @param double[] data
  *            The array of doubles to use.
  */
-function toList(CSVFormat $format, &$result, array $data) {
+function toListDefaultPrecision(CSVFormat $format, &$result, array $data) {
 	toList($format, 20, $result, $data);
 }
 
