@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -30,57 +31,57 @@ namespace Encog\Neural\Data\BiPolar;
 use \Encog\ML\Data\Specific\BiPolarNeuralData;
 use Encog\ML\Data\MLDataError;
 
-require_once("ML\Data\Specific\BiPolarNeuralData.php");
+require_once ("ML\Data\Specific\BiPolarNeuralData.php");
 
 class TestBiPolarNeuralData extends \PHPUnit_Framework_TestCase {
-	public function testConstruct()
-	{
-		$d = [ true, false ];
-		$data = BiPolarNeuralData::fromBooleanArray($d);
-		$this->assertEquals("[T,F]",$data->toString());
-		$this->assertEquals(1,$data->getData(0),0.5);
-		$this->assertEquals(-1,$data->getData(1),0.5);
-		$this->assertEquals(true, $data->getBoolean(0));
-		$this->assertEquals(false, $data->getBoolean(1));
-		$this->assertEquals(count($data->getData()),2);
+
+	public function testConstruct() {
+		$d = [ 
+				true,
+				false ];
+		$data = BiPolarNeuralData::fromBooleanArray( $d );
+		$this->assertEquals( "[T,F]", $data->toString() );
+		$this->assertEquals( 1, $data->getData( 0 ), 0.5 );
+		$this->assertEquals( - 1, $data->getData( 1 ), 0.5 );
+		$this->assertEquals( true, $data->getBoolean( 0 ) );
+		$this->assertEquals( false, $data->getBoolean( 1 ) );
+		$this->assertEquals( count( $data->getData() ), 2 );
 	}
 
-	public function testClone()
-	{
-		$d = [ true, false ];
-		$data2 = BiPolarNeuralData::fromBooleanArray($d);
-		$data = clone($data2);
-		$this->assertEquals("[T,F]",$data->toString());
-		$this->assertEquals(1,$data->getData(0),0.5);
-		$this->assertEquals(-1,$data->getData(1),0.5);
-		$this->assertEquals(true, $data->getBoolean(0));
-		$this->assertEquals(false, $data->getBoolean(1));
-		$this->assertEquals(count($data->getData()),2);
+	public function testClone() {
+		$d = [ 
+				true,
+				false ];
+		$data2 = BiPolarNeuralData::fromBooleanArray( $d );
+		$data = clone ($data2);
+		$this->assertEquals( "[T,F]", $data->toString() );
+		$this->assertEquals( 1, $data->getData( 0 ), 0.5 );
+		$this->assertEquals( - 1, $data->getData( 1 ), 0.5 );
+		$this->assertEquals( true, $data->getBoolean( 0 ) );
+		$this->assertEquals( false, $data->getBoolean( 1 ) );
+		$this->assertEquals( count( $data->getData() ), 2 );
 	}
 
-	public function testError()
-	{
-		$data = new BiPolarNeuralData(2);
-		$this->assertEquals(2, $data->size());
-
-		try
-		{
-			$data->add(0, 0);
-			$this->assertTrue(false);
+	public function testError() {
+		$data = new BiPolarNeuralData( 2 );
+		$this->assertEquals( 2, $data->size() );
+		
+		try {
+			$data->add( 0, 0 );
+			$this->assertTrue( false );
 		}
-		catch(MLDataError $e)
-		{
-		}
+		catch( MLDataError $e ) {}
 	}
 
-	public function testClear()
-	{
-		$d = [1,1];
-		$data = new BiPolarNeuralData(2);
-		$data->setDataFromArray($d);
+	public function testClear() {
+		$d = [ 
+				1,
+				1 ];
+		$data = new BiPolarNeuralData( 2 );
+		$data->setDataFromArray( $d );
 		$data->clear();
-		$this->assertEquals(-1,$data->getData(0),0.5);
-		$data->setData(0,true);
-		$this->assertEquals(true,$data->getBoolean(0));
+		$this->assertEquals( - 1, $data->getData( 0 ), 0.5 );
+		$data->setData( 0, true );
+		$this->assertEquals( true, $data->getBoolean( 0 ) );
 	}
 }

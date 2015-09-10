@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -29,30 +30,29 @@ namespace Test\Neural\Activation;
 
 use \Encog\Engine\Network\Activation\ActivationLinear;
 
-require_once("Engine/Network/Activation/ActivationLinear.php");
-
+require_once ("Engine/Network/Activation/ActivationLinear.php");
 
 class TestActivationLinear extends \PHPUnit_Framework_TestCase {
-	
-	public function testLinear()
-	{
+
+	public function testLinear() {
 		$activation = new ActivationLinear();
-		$this->assertTrue($activation->hasDerivative());
-
-		$clone = clone($activation);
-		$this->assertNotNull($clone);
-
-		$input = [ 1,2,3 ];
-
-		$activation->activationFunction($input,0,count($input));
-
-		$this->assertEquals(1.0,$input[0],0.1);
-		$this->assertEquals(2.0,$input[1],0.1);
-		$this->assertEquals(3.0,$input[2],0.1);
-
-
+		$this->assertTrue( $activation->hasDerivative() );
+		
+		$clone = clone ($activation);
+		$this->assertNotNull( $clone );
+		
+		$input = [ 
+				1,
+				2,
+				3 ];
+		
+		$activation->activationFunction( $input, 0, count( $input ) );
+		
+		$this->assertEquals( 1.0, $input[0], 0.1 );
+		$this->assertEquals( 2.0, $input[1], 0.1 );
+		$this->assertEquals( 3.0, $input[2], 0.1 );
+		
 		// test derivative, should throw an error
-		$input[0] = $activation->derivativeFunction($input[0],$input[0]);
-
+		$input[0] = $activation->derivativeFunction( $input[0], $input[0] );
 	}
 }

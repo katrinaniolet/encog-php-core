@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core

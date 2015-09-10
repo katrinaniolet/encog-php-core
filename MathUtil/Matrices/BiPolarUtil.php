@@ -46,28 +46,28 @@ namespace Encog\MathUtil\Matrices\BiPolarUtil;
  *        	The binary value.
  * @return The bipolar value or array of values (depending on the input)
  */
-function bipolar2double($b) {
-	if (is_bool ( $b )) {
-		if ($b)
+function bipolar2double( $b ) {
+	if( is_bool( $b ) ) {
+		if( $b )
 			return 1;
 		else
 			return - 1;
 	}
-	else if (is_array ( $b )) {
-		if (count ( $b ) > 0 && is_array ( $b [0] )) {
-			$result = array ();
-			for($row = 0; $row < count ( $b ); ++ $row) {
-				$result [$row] = array ();
-				for($col = 0; $col < count ( $b [$row] ); ++ $col) {
-					$result [$row] [$col] = bipolar2double ( $b [$row] [$col] );
+	else if( is_array( $b ) ) {
+		if( count( $b ) > 0 && is_array( $b[0] ) ) {
+			$result = array();
+			for( $row = 0; $row < count( $b ); ++$row ) {
+				$result[$row] = array();
+				for( $col = 0; $col < count( $b[$row] ); ++$col ) {
+					$result[$row][$col] = bipolar2double( $b[$row][$col] );
 				}
 			}
 			return $result;
 		}
 		else {
-			$result = array ();
-			for($i = 0; $i < count ( $b ); ++ $i) {
-				$result [$i] = bipolar2double ( $b [$i] );
+			$result = array();
+			for( $i = 0; $i < count( $b ); ++$i ) {
+				$result[$i] = bipolar2double( $b[$i] );
 			}
 			return $result;
 		}
@@ -84,36 +84,36 @@ function bipolar2double($b) {
  *        	The bipolar value(s).
  * @return The boolean value or array of values (depending on the input)
  */
-function Double2bipolar($d) {
-	if (is_numeric ( $d )) {
-		if ($d > 0) {
+function Double2bipolar( $d ) {
+	if( is_numeric( $d ) ) {
+		if( $d > 0 ) {
 			return true;
 		}
 		else {
 			return false;
 		}
 	}
-	if (is_array ( $d )) {
-		if (count ( $d ) > 0 && is_array ( $d [0] )) {
-			$result = array (
-					count ( $d ) );
+	if( is_array( $d ) ) {
+		if( count( $d ) > 0 && is_array( $d[0] ) ) {
+			$result = array( 
+					count( $d ) );
 			
-			for($row = 0; $row < count ( $d ); ++ $row) {
-				$result [$row] = array (
-						$d [$row] );
-				for($col = 0; $col < count ( $d [$row] ); ++ $col) {
-					$result [$row] [$col] = Double2bipolar ( $d [$row] [$col] );
+			for( $row = 0; $row < count( $d ); ++$row ) {
+				$result[$row] = array( 
+						$d[$row] );
+				for( $col = 0; $col < count( $d[$row] ); ++$col ) {
+					$result[$row][$col] = Double2bipolar( $d[$row][$col] );
 				}
 			}
 			
 			return $result;
 		}
 		else {
-			$result = array (
-					count ( $d ) );
+			$result = array( 
+					count( $d ) );
 			
-			for($i = 0; $i < count ( $d ); ++ $i) {
-				$result [$i] = double2bipolar ( $d [$i] );
+			for( $i = 0; $i < count( $d ); ++$i ) {
+				$result[$i] = double2bipolar( $d[$i] );
 			}
 			
 			return $result;
@@ -129,8 +129,8 @@ function Double2bipolar($d) {
  *        	A binary number in a double.
  * @return A double that will be 0 or 1.
  */
-function NormalizeBinary($d) {
-	if ($d > 0) {
+function NormalizeBinary( $d ) {
+	if( $d > 0 ) {
 		return 1;
 	}
 	else {
@@ -145,7 +145,7 @@ function NormalizeBinary($d) {
  *        	number a bipolar number.
  * @return A binary number.
  */
-function ToBinary($d) {
+function ToBinary( $d ) {
 	return ($d + 1) / 2.0;
 }
 
@@ -156,8 +156,8 @@ function ToBinary($d) {
  *        	binary number.
  * @return A bipolar number.
  */
-function ToBiPolar($d) {
-	return (2 * normalizeBinary ( $d )) - 1;
+function ToBiPolar( $d ) {
+	return (2 * normalizeBinary( $d )) - 1;
 }
 
 /**
@@ -167,6 +167,6 @@ function ToBiPolar($d) {
  *        	A bipolar number.
  * @return A binary number stored as a double
  */
-function ToNormalizedBinary($d) {
-	return normalizeBinary ( toBinary ( $d ) );
+function ToNormalizedBinary( $d ) {
+	return normalizeBinary( toBinary( $d ) );
 }

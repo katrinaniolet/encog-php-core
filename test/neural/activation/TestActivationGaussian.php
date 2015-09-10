@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,28 +26,26 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Test\Neural\Activation;
 
 use \Encog\Engine\Network\Activation\ActivationGaussian;
 
-require_once("\Engine\Network\Activation\ActivationGaussian.php");
+require_once ("\Engine\Network\Activation\ActivationGaussian.php");
 
 class TestActivationGaussian extends \PHPUnit_Framework_TestCase {
 
-	public function testGaussian()
-	{
+	public function testGaussian() {
 		$activation = new ActivationGaussian();
-		$this->assertFalse(!$activation->hasDerivative());
-
-		$clone = clone($activation);
-		$this->assertNotNull($clone);
-
-		$input = [ 0.0  ];
-
-		$activation->activationFunction($input,0,count($input));
-
-		$this->assertEquals(1.0,$input[0],0.1);
-
+		$this->assertFalse( ! $activation->hasDerivative() );
+		
+		$clone = clone ($activation);
+		$this->assertNotNull( $clone );
+		
+		$input = [ 
+				0.0 ];
+		
+		$activation->activationFunction( $input, 0, count( $input ) );
+		
+		$this->assertEquals( 1.0, $input[0], 0.1 );
 	}
 }

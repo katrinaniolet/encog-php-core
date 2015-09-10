@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,33 +26,33 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\Util\CSV;
 
 /**
- * Specifies a CSV format. This allows you to determine if a decimal point or
+ * Specifies a CSV format.
+ * This allows you to determine if a decimal point or
  * decimal comma is uses. It also specifies the character that should be used to
  * separate numbers.
- *
  */
 class CSVFormat extends \Threaded {
-
+	
 	/**
 	 * Use a decimal point, and a comma to separate numbers.
+	 * 
 	 * @var CSVFormat
 	 */
 	public static $DECIMAL_POINT = null;
-
+	
 	/**
 	 * Use a decimal comma, and a semicolon to separate numbers.
-	*/
+	 */
 	public static $DECIMAL_COMMA = null;
-
+	
 	/**
 	 * Decimal point is typically used in English speaking counties.
-	*/
+	 */
 	public static $ENGLISH = null;
-
+	
 	/**
 	 * EG files, internally use a decimal point and comma separator.
 	 */
@@ -66,21 +67,24 @@ class CSVFormat extends \Threaded {
 	public static function getDecimalCharacter() {
 		return localeconv()['decimal_point'];
 	}
-
+	
 	/**
 	 * The decimal character.
+	 * 
 	 * @var char
 	 */
 	private $decimal;
-
+	
 	/**
 	 * The separator character.
+	 * 
 	 * @var char
 	 */
 	private $separator;
-
+	
 	/**
 	 * The number formatter to use for this format.
+	 * 
 	 * @var NumberFormatter
 	 */
 	private $numberFormatter;
@@ -89,27 +93,30 @@ class CSVFormat extends \Threaded {
 	 * Construct a CSV format with he specified decimal and separator
 	 * characters.
 	 *
-	 * @param decimal
-	 *            The decimal character.
-	 * @param separator
-	 *            The separator character.
+	 * @param
+	 *        	decimal
+	 *        	The decimal character.
+	 * @param
+	 *        	separator
+	 *        	The separator character.
 	 */
-	public function __constructor($decimal = '.', $separator = ',') {
-		
-		$this->DECIMAL_POINT = new CSVFormat('.', ',');
-		$this->DECIMAL_COMMA = new CSVFormat(',', ';');
+	public function __constructor( $decimal = '.', $separator = ',' ) {
+		$this->DECIMAL_POINT = new CSVFormat( '.', ',' );
+		$this->DECIMAL_COMMA = new CSVFormat( ',', ';' );
 		$this->ENGLISH = $this->DECIMAL_POINT;
 		$this->EG_FORMAT = $this->DECIMAL_POINT;
 		
 		$this->decimal = $decimal;
 		$this->separator = $separator;
-
-		if ($decimal == '.') {
-			$this->numberFormatter = NumberFormatter::create('en-US',\NumberFormatter::DECIMAL);
-		} else if ($decimal == ',') {
-			$this->numberFormatter = NumberFormatter::create('fr-FR',\NumberFormatter::DECIMAL);
-		} else {
-			$this->numberFormatter = NumberFormatter::create(Locale::getDefault(), \NumberFormatter::DECIMAL);
+		
+		if( $decimal == '.' ) {
+			$this->numberFormatter = NumberFormatter::create( 'en-US', \NumberFormatter::DECIMAL );
+		}
+		else if( $decimal == ',' ) {
+			$this->numberFormatter = NumberFormatter::create( 'fr-FR', \NumberFormatter::DECIMAL );
+		}
+		else {
+			$this->numberFormatter = NumberFormatter::create( Locale::getDefault(), \NumberFormatter::DECIMAL );
 		}
 	}
 
@@ -117,25 +124,27 @@ class CSVFormat extends \Threaded {
 	 * Format the specified number to a string with the specified number of
 	 * fractional digits.
 	 *
-	 * @param double d
-	 *            The number to format.
-	 * @param int digits
-	 *            The number of fractional digits.
+	 * @param
+	 *        	double d
+	 *        	The number to format.
+	 * @param
+	 *        	int digits
+	 *        	The number of fractional digits.
 	 * @return string The number formatted as a string.
 	 */
-	public function format($d, $digits) {
-		$this->synchronized(function($thread){
-			if( is_infinite($d) || is_nan($d) )
+	public function format( $d, $digits ) {
+		$this->synchronized( function ( $thread ) {
+			if( is_infinite( $d ) || is_nan( $d ) )
 				return "0";
-			$this->numberFormatter->setAttribute(\NumberFormatter::GROUPING_USED,false);
-			$this->numberFormatter->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, $digits);
+			$this->numberFormatter->setAttribute( \NumberFormatter::GROUPING_USED, false );
+			$this->numberFormatter->setAttribute( \NumberFormatter::MAX_FRACTION_DIGITS, $digits );
 			
-			return $this->numberFormatter->format($d);
-				
-		});
+			return $this->numberFormatter->format( $d );
+		} );
 	}
 
 	/**
+	 *
 	 * @return char The decimal character.
 	 */
 	public function getDecimal() {
@@ -143,6 +152,7 @@ class CSVFormat extends \Threaded {
 	}
 
 	/**
+	 *
 	 * @return NumberFormat The number formatter.
 	 */
 	public function getNumberFormatter() {
@@ -150,6 +160,7 @@ class CSVFormat extends \Threaded {
 	}
 
 	/**
+	 *
 	 * @return char The separator character.
 	 */
 	public function getSeparator() {
@@ -158,20 +169,25 @@ class CSVFormat extends \Threaded {
 
 	/**
 	 * Determine if the string can be parsed.
-	 * @param string str The string to compare.
+	 * 
+	 * @param
+	 *        	string str The string to compare.
 	 * @return bool True, if the string can be parsed.
 	 */
-	public function isValid($str) {
+	public function isValid( $str ) {
 		try {
-			if( $str === "?") {
+			if( $str === "?" ) {
 				return false;
-			} if( strtolower($str) === strtolower("NaN") ) {
+			}
+			if( strtolower( $str ) === strtolower( "NaN" ) ) {
 				return false;
-			} else {
-				 $this->numberFormatter->parse(doubleval(trim($str)));
+			}
+			else {
+				$this->numberFormatter->parse( doubleval( trim( $str ) ) );
 				return true;
 			}
-		} catch (Exception $e) {
+		}
+		catch( Exception $e ) {
 			return false;
 		}
 	}
@@ -179,26 +195,30 @@ class CSVFormat extends \Threaded {
 	/**
 	 * Parse the specified string to a double.
 	 *
-	 * @param string str
-	 *            The string to parse.
+	 * @param
+	 *        	string str
+	 *        	The string to parse.
 	 * @return double The parsed number.
 	 */
-	public function parse($str) {
-		$this->synchronized(function($thread){
+	public function parse( $str ) {
+		$this->synchronized( function ( $thread ) {
 			try {
-				if( $str === "?") {
+				if( $str === "?" ) {
 					return \NAN;
-				} if( strtolower($str) === strtolower("NaN") ) {
-					return \NAN;
-				} else {
-					return doubleval($this->numberFormatter->parse(doubleval(trim($str))));
 				}
-			} catch (Exception $e) {
-				throw new CSVError("Error:" + $e->getMessage() + " on [" + $str + "], decimal:" + $this->decimal + ",sep: " + $this->separator);
-			}				
-		});
+				if( strtolower( $str ) === strtolower( "NaN" ) ) {
+					return \NAN;
+				}
+				else {
+					return doubleval( $this->numberFormatter->parse( doubleval( trim( $str ) ) ) );
+				}
+			}
+			catch( Exception $e ) {
+				throw new CSVError( "Error:" + $e->getMessage() + " on [" + $str + "], decimal:" + $this->decimal + ",sep: " + $this->separator );
+			}
+		} );
 	}
 }
 
-//instantiate one to initialize the static values
+// instantiate one to initialize the static values
 new CSVFormat();

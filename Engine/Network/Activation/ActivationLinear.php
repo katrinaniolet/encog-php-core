@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,37 +26,40 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\Engine\Network\Activation;
 
 use \Encog\ML\Factory\MLActivationFactory;
 use \Encog\Util\Obj\ActivationUtil;
 
-require_once("ML/Factory/MLActivationFactory.php");
-require_once("Util/Obj/ActivationUtil.php");
+require_once ("ML/Factory/MLActivationFactory.php");
+require_once ("Util/Obj/ActivationUtil.php");
 
 /**
- * The Linear layer is really not an activation function at all. The input is
+ * The Linear layer is really not an activation function at all.
+ * The input is
  * simply passed on, unmodified, to the output. This activation function is
  * primarily theoretical and of little actual use. Usually an activation
  * function that scales between 0 and 1 or -1 and 1 should be used.
  */
 class ActivationLinear implements ActivationFunction {
-
+	
 	/**
 	 * Default empty parameters.
+	 * 
 	 * @var double[]
 	 */
 	public static $P = array();
-
+	
 	/**
 	 * Default empty parameters.
+	 * 
 	 * @var string[]
-	*/
+	 */
 	public static $N = array();
-
+	
 	/**
 	 * The parameters.
+	 * 
 	 * @var double[]
 	 */
 	private $params = array();
@@ -63,16 +67,15 @@ class ActivationLinear implements ActivationFunction {
 	/**
 	 * Construct a linear activation function, with a slope of 1.
 	 */
-	public function __construct() {
-	}
+	public function __construct() {}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function activationFunction(array &$x, $start,$size) {
-	}
+	public function activationFunction( array &$x, $start, $size ) {}
 
 	/**
+	 *
 	 * @return ActivationFunction The object cloned.
 	 */
 	public function __clone() {
@@ -82,7 +85,7 @@ class ActivationLinear implements ActivationFunction {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function derivativeFunction($b, $a) {
+	public function derivativeFunction( $b, $a ) {
 		return 1;
 	}
 
@@ -102,6 +105,7 @@ class ActivationLinear implements ActivationFunction {
 	}
 
 	/**
+	 *
 	 * @return boolean Return true, linear has a 1 derivative.
 	 */
 	public function hasDerivative() {
@@ -111,7 +115,7 @@ class ActivationLinear implements ActivationFunction {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setParam($index, $value) {
+	public function setParam( $index, $value ) {
 		$this->params[$index] = $value;
 	}
 
@@ -119,7 +123,7 @@ class ActivationLinear implements ActivationFunction {
 	 * {@inheritDoc}
 	 */
 	public function getFactoryCode() {
-		return ActivationUtil\generateActivationFactory(MLActivationFactory\AF_LINEAR, $this);
+		return ActivationUtil\generateActivationFactory( MLActivationFactory\AF_LINEAR, $this );
 	}
 
 	public function getLabel() {

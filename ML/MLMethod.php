@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -28,13 +29,13 @@
 namespace Encog\ML;
 
 /**
- * This interface is the base for all Encog Machine Learning methods.  It
+ * This interface is the base for all Encog Machine Learning methods.
+ * It
  * defines very little, other than the fact that a subclass is a Machine
- * Learning Method.  A MLMethod is an algorithm that accepts data and
- * provides some sort of insight into it.  This could be a neural network,
+ * Learning Method. A MLMethod is an algorithm that accepts data and
+ * provides some sort of insight into it. This could be a neural network,
  * support vector machine, clustering algorithm, or something else entirely.
  *
  * Many MLMethods must be trained by a MLTrain object before they are useful.
  */
-interface MLMethod {
-}
+interface MLMethod {}

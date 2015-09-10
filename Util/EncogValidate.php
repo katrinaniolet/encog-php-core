@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -35,34 +36,27 @@ use \Encog\ML\Data\MLDataSet;
 use \Encog\Neural\NeuralNetworkError;
 use \Encog\Neural\Networks\ContainsFlat;
 
-require_once("ML\Data\MLDataSet.php");
-require_once("Neural\NeuralNetworkError.php");
-require_once("Neural\Networks\ContainsFlat.php");
-
+require_once ("ML\Data\MLDataSet.php");
+require_once ("Neural\NeuralNetworkError.php");
+require_once ("Neural\Networks\ContainsFlat.php");
 
 /**
  * Validate a network for training.
  *
- * @param ContainsFlat $network The network to validate.
- * @param MLDataSet $training The training set to validate.
+ * @param ContainsFlat $network
+ *        	The network to validate.
+ * @param MLDataSet $training
+ *        	The training set to validate.
  */
-function validateNetworkForTraining(ContainsFlat $network, MLDataSet $training) {
-
+function validateNetworkForTraining( ContainsFlat $network, MLDataSet $training ) {
 	$inputCount = $network->getFlat()->getInputCount();
 	$outputCount = $network->getFlat()->getOutputCount();
-
-	if ($inputCount != $training->getInputSize()) {
-		throw new NeuralNetworkError("The input layer size of "
-				+ $inputCount
-				+ " must match the training input size of "
-				+ $training->getInputSize() + ".");
+	
+	if( $inputCount != $training->getInputSize() ) {
+		throw new NeuralNetworkError( "The input layer size of " + $inputCount + " must match the training input size of " + $training->getInputSize() + "." );
 	}
-
-	if (($training->getIdealSize() > 0)
-			&& ($outputCount != $training->getIdealSize())) {
-				throw new NeuralNetworkError("The output layer size of "
-						+ $outputCount
-						+ " must match the training input size of "
-						+ $training->getIdealSize() + ".");
-			}
+	
+	if( ($training->getIdealSize() > 0) && ($outputCount != $training->getIdealSize()) ) {
+		throw new NeuralNetworkError( "The output layer size of " + $outputCount + " must match the training input size of " + $training->getIdealSize() + "." );
+	}
 }

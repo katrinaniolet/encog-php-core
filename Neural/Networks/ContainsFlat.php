@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -32,10 +33,11 @@ use \Encog\ML\MLMethod;
 /**
  * Interface that specifies that a machine learning method contains a
  * flat network.
- *
  */
 interface ContainsFlat extends MLMethod {
+
 	/**
+	 *
 	 * @return FlatNetwork The flat network associated with this neural network.
 	 */
 	public function getFlat();

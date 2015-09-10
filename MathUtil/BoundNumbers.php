@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -36,7 +37,7 @@ namespace Encog\MathUtil\BoundNumbers;
 /**
  * Too small of a number.
  */
-const TOO_SMALL = -1.0E20;
+const TOO_SMALL = - 1.0E20;
 
 /**
  * Too big of a number.
@@ -46,16 +47,19 @@ const TOO_BIG = 1.0E20;
 /**
  * Bound the number so that it does not become too big or too small.
  *
- * @param double d
- *            The number to check.
+ * @param
+ *        	double d
+ *        	The number to check.
  * @return double The new number. Only changed if it was too big or too small.
  */
-function bound($d) {
-	if ($d < \Encog\MathUtil\BoundNumbers\TOO_SMALL) {
+function bound( $d ) {
+	if( $d < \Encog\MathUtil\BoundNumbers\TOO_SMALL ) {
 		return \Encog\MathUtil\BoundNumbers\TOO_SMALL;
-	} else if ($d > \Encog\MathUtil\BoundNumbers\TOO_BIG) {
+	}
+	else if( $d > \Encog\MathUtil\BoundNumbers\TOO_BIG ) {
 		return \Encog\MathUtil\BoundNumbers\TOO_BIG;
-	} else {
+	}
+	else {
 		return $d;
 	}
 }

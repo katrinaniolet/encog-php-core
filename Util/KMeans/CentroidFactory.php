@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -29,11 +30,14 @@ namespace Encog\Util\KMeans;
 
 /**
  * An object that can create centroids.
- * @param <O> The element type for the centroid.
+ * 
+ * @param
+ *        	<O> The element type for the centroid.
  */
-interface CentroidFactory
-{
+interface CentroidFactory {
+
 	/**
+	 *
 	 * @return Centroid The centroid.
 	 */
 	public function createCentroid();

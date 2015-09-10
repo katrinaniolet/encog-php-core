@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,16 +26,15 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\Engine\Network\Activation;
 
 use \Encog\MathUtil\BoundMath;
 use \Encog\ML\Factory\MLActivationFactory;
 use \Encog\Util\Obj\ActivationUtil;
 
-require_once("MathUtil/BoundMath.php");
-require_once("ML/Factory/MLActivationFactory.php");
-require_once("Util/Obj/ActivationUtil.php");
+require_once ("MathUtil/BoundMath.php");
+require_once ("ML/Factory/MLActivationFactory.php");
+require_once ("Util/Obj/ActivationUtil.php");
 
 /**
  * An activation function based on the logarithm function.
@@ -46,9 +46,10 @@ require_once("Util/Obj/ActivationUtil.php");
  * slowed significantly since the error surface is very at in this instance.
  */
 class ActivationLOG implements ActivationFunction {
-
+	
 	/**
 	 * The parameters.
+	 * 
 	 * @var double[]
 	 */
 	private $params = array();
@@ -56,24 +57,24 @@ class ActivationLOG implements ActivationFunction {
 	/**
 	 * Construct the activation function.
 	 */
-	public function __construct() {
-	}
+	public function __construct() {}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function activationFunction(array &$x, $start,$size) {
-
-		for ($i = $start; $i < $start + $size; ++$i) {
-			if ($x[$i] >= 0) {
-				$x[$i] = BoundMath\log(1 + $x[$i]);
-			} else {
-				$x[$i] = -BoundMath\log(1 - $x[$i]);
+	public function activationFunction( array &$x, $start, $size ) {
+		for( $i = $start; $i < $start + $size; ++$i ) {
+			if( $x[$i] >= 0 ) {
+				$x[$i] = BoundMath\log( 1 + $x[$i] );
+			}
+			else {
+				$x[$i] = - BoundMath\log( 1 - $x[$i] );
 			}
 		}
 	}
 
 	/**
+	 *
 	 * @return ActivationFunction The object cloned.
 	 */
 	public function __clone() {
@@ -83,10 +84,11 @@ class ActivationLOG implements ActivationFunction {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function derivativeFunction($b, $a) {
-		if ($b >= 0) {
+	public function derivativeFunction( $b, $a ) {
+		if( $b >= 0 ) {
 			return 1 / (1 + $b);
-		} else {
+		}
+		else {
 			return 1 / (1 - $b);
 		}
 	}
@@ -107,6 +109,7 @@ class ActivationLOG implements ActivationFunction {
 	}
 
 	/**
+	 *
 	 * @return boolean Return true, log has a derivative.
 	 */
 	public function hasDerivative() {
@@ -116,16 +119,15 @@ class ActivationLOG implements ActivationFunction {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setParam($index, $value) {
+	public function setParam( $index, $value ) {
 		$this->params[$index] = $value;
-
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getFactoryCode() {
-		return ActivationUtil\generateActivationFactory(MLActivationFactory\AF_LOG, $this);
+		return ActivationUtil\generateActivationFactory( MLActivationFactory\AF_LOG, $this );
 	}
 
 	public function getLabel() {

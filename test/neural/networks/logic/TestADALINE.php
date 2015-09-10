@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,7 +26,6 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Test\Neural\Networks\Logic;
 
 use \Encog\ML\Data\MLDataSet;
@@ -37,21 +37,19 @@ use \Encog\Neural\Networks\Training\Simple\TrainAdaline;
 use \Encog\Neural\Pattern\ADALINEPattern;
 use \Test\Neural\Networks\TestXOR;
 
-require_once("Neural/Pattern/ADALINEPattern.php");
+require_once ("Neural/Pattern/ADALINEPattern.php");
 
 class TestADALINE extends \PHPUnit_Framework_TestCase {
 
-	public function testAdalineNet() 
-	{
+	public function testAdalineNet() {
 		$pattern = new ADALINEPattern();
-		$pattern->setInputNeurons(2);
-		$pattern->setOutputNeurons(1);
+		$pattern->setInputNeurons( 2 );
+		$pattern->setOutputNeurons( 1 );
 		$network = $pattern->generate();
-
+		
 		// train it
-		$training = new BasicMLDataSet(TestXOR\XOR_INPUT,TestXOR\XOR_IDEAL);
-		$train = new TrainAdaline($network,$training,0.01);
-		NetworkUtil\testTraining($training,$train,0.01);
+		$training = new BasicMLDataSet( TestXOR\XOR_INPUT, TestXOR\XOR_IDEAL );
+		$train = new TrainAdaline( $network, $training, 0.01 );
+		NetworkUtil\testTraining( $training, $train, 0.01 );
 	}
-
 }

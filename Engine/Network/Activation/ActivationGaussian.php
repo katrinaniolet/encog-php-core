@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,21 +26,19 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\Engine\Network\Activation;
 
 class ActivationGaussian implements ActivationFunction {
-
-
+	
 	/**
 	 * The parameters.
 	 */
-	private $params=array();
+	private $params = array();
 
-	public function __construct() {
-	}
+	public function __construct() {}
 
 	/**
+	 *
 	 * @return ActivationFunction The object cloned.
 	 */
 	public function __clone() {
@@ -47,6 +46,7 @@ class ActivationGaussian implements ActivationFunction {
 	}
 
 	/**
+	 *
 	 * @return bool Return true, gaussian has a derivative.
 	 */
 	public function hasDerivative() {
@@ -56,20 +56,17 @@ class ActivationGaussian implements ActivationFunction {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function activationFunction(array &$x, $start,
-			$size) {
-
-		for ($i = $start; $i < $start + $size; ++$i) {
-			$x[$i] = exp(-pow(2.5*$x[$i], 2.0));
+	public function activationFunction( array &$x, $start, $size ) {
+		for( $i = $start; $i < $start + $size; ++$i ) {
+			$x[$i] = exp( - pow( 2.5 * $x[$i], 2.0 ) );
 		}
-
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function derivativeFunction($b, $a) {
-		return exp(pow(2.5 * $b,2.0) * 12.5 * $b);
+	public function derivativeFunction( $b, $a ) {
+		return exp( pow( 2.5 * $b, 2.0 ) * 12.5 * $b );
 	}
 
 	/**
@@ -90,15 +87,14 @@ class ActivationGaussian implements ActivationFunction {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setParam($index, $value) {
+	public function setParam( $index, $value ) {
 		$this->params[$index] = $value;
-
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getFactoryCode() {
-		return ActivationUtil\generateActivationFactory(MLActivationFactor\AF_GAUSSIAN, $this);
+		return ActivationUtil\generateActivationFactory( MLActivationFactor\AF_GAUSSIAN, $this );
 	}
 }

@@ -92,7 +92,7 @@ function copy( Matrix $source, Matrix &$target ) {
 			$t[$row][$col] = $s[$row][$col];
 		}
 	}
-	$target = Matrix::matrixFromDoubles($t);
+	$target = Matrix::matrixFromDoubles( $t );
 }
 
 /**

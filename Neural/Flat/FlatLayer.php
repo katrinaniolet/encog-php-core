@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -30,34 +31,39 @@ namespace Encog\Neural\Flat;
 use \Encog;
 use \Encog\Engine\Network\Activation\ActivationFunction;
 
-require_once("Engine\Network\Activation\ActivationFunction.php");
+require_once ("Engine\Network\Activation\ActivationFunction.php");
 
 /**
- * Used to configure a flat layer. Flat layers are not kept by a Flat Network,
+ * Used to configure a flat layer.
+ * Flat layers are not kept by a Flat Network,
  * beyond setup.
  */
 class FlatLayer {
-
+	
 	/**
 	 * The activation function.
+	 * 
 	 * @var ActivationFunction $activation
 	 */
 	private $activation;
-
+	
 	/**
 	 * The neuron count.
+	 * 
 	 * @var int $count
 	 */
 	private $count = 0;
-
+	
 	/**
 	 * The bias activation, usually 1 for bias or 0 for no bias.
+	 * 
 	 * @var double $biasActivation
 	 */
 	private $biasActivation;
-
+	
 	/**
 	 * The layer that feeds this layer's context.
+	 * 
 	 * @var FlatLayer $contextFedBy
 	 */
 	private $contextFedBy = null;
@@ -65,17 +71,21 @@ class FlatLayer {
 	/**
 	 * Construct a flat layer.
 	 *
-	 * @param ActivationFunction $activation The activation function.
-	 * @param int $count The neuron count.
-	 * @param double $biasActivation The bias activation.
+	 * @param ActivationFunction $activation
+	 *        	The activation function.
+	 * @param int $count
+	 *        	The neuron count.
+	 * @param double $biasActivation
+	 *        	The bias activation.
 	 */
-	public function __construct(ActivationFunction $activation, $count, $biasActivation) {
+	public function __construct( ActivationFunction $activation, $count, $biasActivation ) {
 		$this->activation = $activation;
 		$this->count = $count;
 		$this->biasActivation = $biasActivation;
 	}
 
 	/**
+	 *
 	 * @return ActivationFunction the activation
 	 */
 	public function getActivation() {
@@ -83,28 +93,33 @@ class FlatLayer {
 	}
 
 	/**
+	 *
 	 * @return double Get the bias activation.
 	 */
 	public function getBiasActivation() {
-		if ($this->hasBias()) {
+		if( $this->hasBias() ) {
 			return $this->biasActivation;
-		} else {
+		}
+		else {
 			return 0;
 		}
 	}
 
 	/**
+	 *
 	 * @return int The number of neurons our context is fed by.
 	 */
 	public function getContextCount() {
-		if ($this->contextFedBy == null) {
+		if( $this->contextFedBy == null ) {
 			return 0;
-		} else {
+		}
+		else {
 			return $this->contextFedBy->getCount();
 		}
 	}
 
 	/**
+	 *
 	 * @return FlatLayer The layer that feeds this layer's context.
 	 */
 	public function getContextFedBy() {
@@ -112,6 +127,7 @@ class FlatLayer {
 	}
 
 	/**
+	 *
 	 * @return int the count
 	 */
 	public function getCount() {
@@ -119,55 +135,61 @@ class FlatLayer {
 	}
 
 	/**
+	 *
 	 * @return int The total number of neurons on this layer, includes context, bias
 	 *         and regular.
 	 */
 	public function getTotalCount() {
-		if ($this->contextFedBy == null) {
+		if( $this->contextFedBy == null ) {
 			return $this->getCount() + ($this->hasBias() ? 1 : 0);
-		} else {
-			return $this->getCount() + ($this->hasBias() ? 1 : 0)
-			+ $this->contextFedBy->getCount();
+		}
+		else {
+			return $this->getCount() + ($this->hasBias() ? 1 : 0) + $this->contextFedBy->getCount();
 		}
 	}
 
 	/**
+	 *
 	 * @return bool the bias
 	 */
 	public function hasBias() {
-		return abs($this->biasActivation) > Encog\DEFAULT_DOUBLE_EQUAL;
+		return abs( $this->biasActivation ) > Encog\DEFAULT_DOUBLE_EQUAL;
 	}
 
 	/**
+	 *
 	 * @param ActivationFunction $activation
-	 *            the activation to set
+	 *        	the activation to set
 	 */
-	public function setActivation(ActivationFunction $activation) {
+	public function setActivation( ActivationFunction $activation ) {
 		$this->activation = $activation;
 	}
 
 	/**
 	 * Set the bias activation.
 	 *
-	 * @param double a
-	 *            The bias activation.
+	 * @param
+	 *        	double a
+	 *        	The bias activation.
 	 */
-	public function setBiasActivation($a) {
+	public function setBiasActivation( $a ) {
 		$this->biasActivation = $a;
 	}
 
 	/**
 	 * Set the layer that this layer's context is fed by.
 	 *
-	 * @param from
-	 *            The layer feeding.
+	 * @param
+	 *        	from
+	 *        	The layer feeding.
 	 */
-	public function setContextFedBy(FlatLayer $from) {
+	public function setContextFedBy( FlatLayer $from ) {
 		$this->contextFedBy = $from;
 	}
 
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @return string
 	 */
 	public function toString() {
@@ -176,22 +198,23 @@ class FlatLayer {
 		$result .= ": count=";
 		$result .= $this->count;
 		$result .= ",bias=";
-
-		if ($this->hasBias()) {
+		
+		if( $this->hasBias() ) {
 			$result .= $this->biasActivation->toString();
-		} else {
+		}
+		else {
 			$result .= "false";
 		}
-		if ($this->contextFedBy != null) {
+		if( $this->contextFedBy != null ) {
 			$result .= ",contextFed=";
-			if ($this->contextFedBy == this) {
+			if( $this->contextFedBy == this ) {
 				$result .= "itself";
-			} else {
+			}
+			else {
 				$result .= $this->contextFedBy;
 			}
 		}
 		$result .= "]";
 		return $result;
 	}
-
 }

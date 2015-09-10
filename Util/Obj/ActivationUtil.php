@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,31 +26,30 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\Util\Obj\ActivationUtil;
 
 use \Encog\Engine\Network\Activation\ActivationFunction;
 use \Encog\Util\CSV\CSVFormat;
 use \Encog\Util\CSV\NumberList;
 
-require_once("Engine/Network/Activation/ActivationFunction.php");
-require_once("Util/CSV/CSVFormat.php");
-require_once("Util/CSV/NumberList.php");
-
+require_once ("Engine/Network/Activation/ActivationFunction.php");
+require_once ("Util/CSV/CSVFormat.php");
+require_once ("Util/CSV/NumberList.php");
 
 /**
- * @param string $name
- * @param ActivationFunction $af
+ *
+ * @param string $name        	
+ * @param ActivationFunction $af        	
  * @return string
  */
-function generateActivationFactory($name, ActivationFunction $af) {
-		$result = strtoupper($name);
-
-		if( $af->getParams()!=null && count($af->getParams())>0 ) {
-			$result .= '[';
-			NumberList\toList(CSVFormat::EG_FORMAT, $result, $af->getParams());
-			$result .= ']';
-		}
-
-		return $result;
+function generateActivationFactory( $name, ActivationFunction $af ) {
+	$result = strtoupper( $name );
+	
+	if( $af->getParams() != null && count( $af->getParams() ) > 0 ) {
+		$result .= '[';
+		NumberList\toList( CSVFormat::EG_FORMAT, $result, $af->getParams() );
+		$result .= ']';
 	}
+	
+	return $result;
+}

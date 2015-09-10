@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,17 +26,17 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\Engine\Network\Activation;
 
 /**
  * The bipolar sigmoid activation function is like the regular sigmoid activation function,
- * except Bipolar sigmoid activation function. TheOutput range is -1 to 1 instead of the more normal 0 to 1.
+ * except Bipolar sigmoid activation function.
+ * TheOutput range is -1 to 1 instead of the more normal 0 to 1.
  *
  * This activation is typically part of a CPPN neural network, such as
  * HyperNEAT.
  *
- * The idea for this activation function was developed by  Ken Stanley, of
+ * The idea for this activation function was developed by Ken Stanley, of
  * the University of Texas at Austin.
  * http://www.cs.ucf.edu/~kstanley/
  */
@@ -44,16 +45,16 @@ class ActivationBipolarSteepenedSigmoid implements ActivationFunction {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function activationFunction(array &$d, $start, $size) {
-		for($i=$start;$i<$start+$size;++$i) {
-			$d[$i] = (2.0 / (1.0 + exp(-4.9 * $d[$i]))) - 1.0;
+	public function activationFunction( array &$d, $start, $size ) {
+		for( $i = $start; $i < $start + $size; ++$i ) {
+			$d[$i] = (2.0 / (1.0 + exp( - 4.9 * $d[$i] ))) - 1.0;
 		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function derivativeFunction($b, $a) {
+	public function derivativeFunction( $b, $a ) {
 		return 1;
 	}
 
@@ -68,22 +69,20 @@ class ActivationBipolarSteepenedSigmoid implements ActivationFunction {
 	 * {@inheritDoc}
 	 */
 	public function getParams() {
-		//TODO(katrina) was: return ActivationLinear.P;
+		// TODO(katrina) was: return ActivationLinear.P;
 		return array();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setParam($index, $value) {
-
-	}
+	public function setParam( $index, $value ) {}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getParamNames() {
-		//TODO(katrina) was return ActivationLinear.N;
+		// TODO(katrina) was return ActivationLinear.N;
 		return array();
 	}
 
@@ -100,5 +99,4 @@ class ActivationBipolarSteepenedSigmoid implements ActivationFunction {
 	public function getFactoryCode() {
 		return null;
 	}
-
 }

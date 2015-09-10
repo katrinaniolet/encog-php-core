@@ -35,6 +35,7 @@ use \Encog\MathUtil\Matrices\MatrixMath;
 
 require_once ("MathUtil/Matrices/Matrix.php");
 require_once ("MathUtil/Matrices/MatrixMath.php");
+
 class TestMatrixMath extends \PHPUnit_Framework_TestCase {
 
 	public function testInverse() {

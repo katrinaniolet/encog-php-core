@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -49,7 +50,7 @@ class HopfieldPattern implements NeuralNetworkPattern {
 	 * How many neurons in the Hopfield network.
 	 * Default to -1, which is
 	 * invalid. Therefore this value must be set.
-	 * 
+	 *
 	 * @var int
 	 */
 	private $neuronCount = - 1;

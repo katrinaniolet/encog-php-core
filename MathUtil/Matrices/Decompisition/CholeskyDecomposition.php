@@ -83,9 +83,9 @@ class CholeskyDecomposition {
 		$a = $matrix->getData();
 		$this->n = $matrix->getRows();
 		$this->l = new \ArrayObject();
-		for($r=0; $r<$this->n; ++$r) {
+		for( $r = 0; $r < $this->n; ++$r ) {
 			$this->l[$r] = new \ArrayObject();
-			for($c=0;$c<$this->n;++$c) {
+			for( $c = 0; $c < $this->n; ++$c ) {
 				$this->l[$r][$c] = 0.0;
 			}
 		}

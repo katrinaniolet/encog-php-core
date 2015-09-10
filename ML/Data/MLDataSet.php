@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,7 +26,6 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\ML\Data;
 
 /**
@@ -45,72 +45,82 @@ namespace Encog\ML\Data;
 interface MLDataSet {
 
 	/**
+	 *
 	 * @return int The size of the ideal data.
 	 */
 	public function getIdealSize();
 
 	/**
+	 *
 	 * @return int The size of the input data.
-	*/
+	 */
 	public function getInputSize();
 
 	/**
+	 *
 	 * @return bool True if this is a supervised training set.
-	*/
+	 */
 	public function isSupervised();
 
 	/**
 	 * Determine the total number of records in the set.
 	 *
 	 * @return long The total number of records in the set.
-	*/
+	 */
 	public function getRecordCount();
 
 	/**
 	 * Read an individual record, specified by index, in random order.
 	 *
-	 * @param long index
-	 *            The index to read.
-	 * @param MLDataPair pair
-	 *            The pair that the record will be copied into.
-	*/
-	public function getRecord($index, MLDataPair $pair);
+	 * @param
+	 *        	long index
+	 *        	The index to read.
+	 * @param
+	 *        	MLDataPair pair
+	 *        	The pair that the record will be copied into.
+	 */
+	public function getRecord( $index, MLDataPair $pair );
 
 	/**
 	 * Opens an additional instance of this dataset.
 	 *
 	 * @return MLDataSet The new instance.
-	*/
+	 */
 	public function openAdditional();
 
 	/**
-	 * Add a set of input and ideal data to the dataset. This is used with
+	 * Add a set of input and ideal data to the dataset.
+	 * This is used with
 	 * supervised training, as ideal output is provided. Note: not all
 	 * implementations support the add methods.
 	 *
 	 * if $idealData is null this is used with unsuporvised //TODO(katrin) documentation
 	 *
-	 * @param mixed inputData
-	 *            Input data.
-	 * @param MLData idealData
-	 *            Ideal data.
-	*/
-	public function add($inputData, MLData $idealData = null );
+	 * @param
+	 *        	mixed inputData
+	 *        	Input data.
+	 * @param
+	 *        	MLData idealData
+	 *        	Ideal data.
+	 */
+	public function add( $inputData, MLData $idealData = null );
 
 	/**
 	 * Close this datasource and release any resources obtained by it, including
 	 * any iterators created.
-	*/
+	 */
 	public function close();
 
 	/**
+	 *
 	 * @return int
 	 */
 	public function size();
 
 	/**
-	 * @param int $index
+	 *
+	 * @param int $index        	
 	 * @return MLDataPair
 	 */
-	public function get($index);
+	public function get( $index );
 }

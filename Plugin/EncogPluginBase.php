@@ -32,27 +32,30 @@ namespace Encog\Plugin;
  * The base plugin for Encog.
  */
 interface EncogPluginBase {
-
 	const TYPE_LOGGING = 1;
 	const TYPE_SERVICE = 0;
 
 	/**
+	 *
 	 * @return int The type number for this plugin.
 	 */
 	public function getPluginType();
 
 	/**
+	 *
 	 * @return int The service type provided by this plugin.
-	*/
+	 */
 	public function getPluginServiceType();
 
 	/**
+	 *
 	 * @return string The name of the plugin.
-	*/
+	 */
 	public function getPluginName();
 
 	/**
+	 *
 	 * @return string The plugin description.
-	*/
-	public function  getPluginDescription();
+	 */
+	public function getPluginDescription();
 }

@@ -95,7 +95,7 @@ interface Layer {
 
 	/**
 	 * Set the activation function.
-	 * 
+	 *
 	 * @param
 	 *        	ActivationFunction activation The activation function.
 	 */

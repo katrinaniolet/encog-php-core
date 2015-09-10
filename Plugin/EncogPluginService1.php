@@ -33,46 +33,52 @@ use \Encog\ML\MLMethod;
 use \Encog\ML\Data\MLDataSet;
 use \Encog\ML\Train\MLTrain;
 
-require_once("Engine/Network/Activation/ActivationFunction.php");
-require_once("ML/MLMethod.php");
-require_once("ML/Data/MLDataSet.php");
+require_once ("Engine/Network/Activation/ActivationFunction.php");
+require_once ("ML/MLMethod.php");
+require_once ("ML/Data/MLDataSet.php");
 
 /**
  * A service plugin provides services, such as the creation of activation
  * functions, machine learning methods and training methods.
- *
  */
 interface EncogPluginService1 extends EncogPluginBase {
 
 	/**
 	 * Create an activation function.
-	 * @param string name The name of the activation function.
+	 * 
+	 * @param
+	 *        	string name The name of the activation function.
 	 * @return ActivationFunctoin The newly created activation function.
 	 */
-	public function createActivationFunction($name);
+	public function createActivationFunction( $name );
 
 	/**
 	 * Create a new machine learning method.
-	 * @param string methodType The method to create.
-	 * @param string architecture The architecture string.
-	 * @param int input The input count.
-	 * @param int output The output count.
+	 * 
+	 * @param
+	 *        	string methodType The method to create.
+	 * @param
+	 *        	string architecture The architecture string.
+	 * @param
+	 *        	int input The input count.
+	 * @param
+	 *        	int output The output count.
 	 * @return MLMethod The newly created machine learning method.
-	*/
-	public function createMethod($methodType,
-			$architecture,
-			$input, $output);
+	 */
+	public function createMethod( $methodType, $architecture, $input, $output );
 
 	/**
 	 * Create a trainer.
-	 * @param MLMethod method The method to train.
-	 * @param MLDataSet training The training data.
-	 * @param string type Type type of trainer.
-	 * @param string args The training args.
+	 * 
+	 * @param
+	 *        	MLMethod method The method to train.
+	 * @param
+	 *        	MLDataSet training The training data.
+	 * @param
+	 *        	string type Type type of trainer.
+	 * @param
+	 *        	string args The training args.
 	 * @return MLTrain The new training method.
-	*/
-	public function createTraining(MLMethod $method,
-			MLDataSet $training,
-			$type, $args);
-
+	 */
+	public function createTraining( MLMethod $method, MLDataSet $training, $type, $args );
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -35,6 +36,7 @@ use \Encog\MathUtil\Matrices\Decomposition\CholeskyDecomposition;
 require_once ("MathUtil/Matrices/Matrix.php");
 require_once ("MathUtil/Matrices/MatrixMath.php");
 require_once ("MathUtil/Matrices/Decompisition/CholeskyDecomposition.php");
+
 class TestDecomp extends \PHPUnit_Framework_TestCase {
 
 	public function testCholesky() {

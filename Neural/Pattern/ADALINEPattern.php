@@ -36,7 +36,7 @@ use \Encog\Neural\Networks\BasicNetwork;
 use \Encog\Neural\Networks\Layers\BasicLayer;
 use \Encog\Neural\Networks\Layers\Layer;
 
-require_once("Neural\Pattern\NeuralNetworkPattern.php");
+require_once ("Neural\Pattern\NeuralNetworkPattern.php");
 
 /**
  * Construct an ADALINE neural network.
@@ -45,14 +45,14 @@ class ADALINEPattern implements NeuralNetworkPattern {
 	
 	/**
 	 * The number of neurons in the input layer.
-	 * 
+	 *
 	 * @var int
 	 */
 	private $inputNeurons = 0;
 	
 	/**
 	 * The number of neurons in the output layer.
-	 * 
+	 *
 	 * @var int
 	 */
 	private $outputNeurons = 0;

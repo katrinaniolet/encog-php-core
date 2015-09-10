@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -29,7 +30,8 @@
 /**
  * TODO(katrina) documentation
  * Java will sometimes return Math.NaN or Math.Infinity when numbers get to
- * large or too small. This can have undesirable effects. This class provides
+ * large or too small.
+ * This can have undesirable effects. This class provides
  * some basic math functions that may be in danger of returning such a value.
  * This class imposes a very large and small ceiling and floor to keep the
  * numbers within range.
@@ -38,82 +40,90 @@ namespace Encog\MathUtil\BoundMath;
 
 use \Encog\MathUtil;
 
-require_once("MathUtil/BoundNumbers.php");
-
+require_once ("MathUtil/BoundNumbers.php");
 
 /**
  * Calculate the cos.
  *
- * @param double a
- *            The value passed to the function.
+ * @param
+ *        	double a
+ *        	The value passed to the function.
  * @return double The result of the function.
  */
-function cos($a) {
-	return \Encog\MathUtil\BoundNumbers\bound(\cos($a));
+function cos( $a ) {
+	return \Encog\MathUtil\BoundNumbers\bound( \cos( $a ) );
 }
 
 /**
  * Calculate the exp.
  *
- * @param double a
- *            The value passed to the function.
+ * @param
+ *        	double a
+ *        	The value passed to the function.
  * @return double The result of the function.
  */
-function exp($a) {
-	return \Encog\MathUtil\BoundNumbers\bound(\exp($a));
+function exp( $a ) {
+	return \Encog\MathUtil\BoundNumbers\bound( \exp( $a ) );
 }
 
 /**
  * Calculate the log.
  *
- * @param double a
- *            The value passed to the function.
+ * @param
+ *        	double a
+ *        	The value passed to the function.
  * @return double The result of the function.
  */
-function log($a) {
-	return \Encog\MathUtil\BoundNumbers\bound(\log($a));
+function log( $a ) {
+	return \Encog\MathUtil\BoundNumbers\bound( \log( $a ) );
 }
 
 /**
  * Calculate the power of a number.
  *
- * @param double a
- *            The base.
- * @param double b
- *            The exponent.
+ * @param
+ *        	double a
+ *        	The base.
+ * @param
+ *        	double b
+ *        	The exponent.
  * @return double The result of the function.
  */
-function pow($a, $b) {
-	return \Encog\MathUtil\BoundNumbers\bound(\pow($a, $b));
+function pow( $a, $b ) {
+	return \Encog\MathUtil\BoundNumbers\bound( \pow( $a, $b ) );
 }
 
 /**
  * Calculate the sin.
  *
- * @param double a
- *            The value passed to the function.
+ * @param
+ *        	double a
+ *        	The value passed to the function.
  * @return double The result of the function.
  */
-function sin( $a) {
-	return \Encog\MathUtil\BoundNumbers\bound(\sin($a));
+function sin( $a ) {
+	return \Encog\MathUtil\BoundNumbers\bound( \sin( $a ) );
 }
 
 /**
  * Calculate the square root.
  *
- * @param double a
- *            The value passed to the function.
+ * @param
+ *        	double a
+ *        	The value passed to the function.
  * @return double The result of the function.
  */
-function sqrt($a) {
-	return \sqrt($a);
+function sqrt( $a ) {
+	return \sqrt( $a );
 }
 
 /**
  * Calculate TANH, within bounds.
- * @param double d The value to calculate for.
+ * 
+ * @param
+ *        	double d The value to calculate for.
  * @return double The result.
  */
-function tanh($d) {
-	return \Encog\MathUtil\BoundNumbers\bound(\tanh($d));
+function tanh( $d ) {
+	return \Encog\MathUtil\BoundNumbers\bound( \tanh( $d ) );
 }
