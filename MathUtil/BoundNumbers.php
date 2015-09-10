@@ -26,27 +26,36 @@
  * http://www.heatonresearch.com/copyright
  */
 
-namespace Test\Neural\Activation;
+/**
+ * TODO(katrina) documentation
+ * A simple class that prevents numbers from getting either too big or too
+ * small.
+ */
+namespace Encog\MathUtil\BoundNumbers;
 
-use \Encog\Engine\Network\Activation\ActivationGaussian;
+/**
+ * Too small of a number.
+ */
+const TOO_SMALL = -1.0E20;
 
-require_once("\Engine\Network\Activation\ActivationGaussian.php");
+/**
+ * Too big of a number.
+ */
+const TOO_BIG = 1.0E20;
 
-class TestActivationGaussian extends \PHPUnit_Framework_TestCase {
-
-	public function testGaussian()
-	{
-		$activation = new ActivationGaussian();
-		$this->assertFalse(!$activation->hasDerivative());
-
-		$clone = clone($activation);
-		$this->assertNotNull($clone);
-
-		$input = [ 0.0  ];
-
-		$activation->activationFunction($input,0,count($input));
-
-		$this->assertEquals(1.0,$input[0],0.1);
-
+/**
+ * Bound the number so that it does not become too big or too small.
+ *
+ * @param double d
+ *            The number to check.
+ * @return double The new number. Only changed if it was too big or too small.
+ */
+function bound($d) {
+	if ($d < \Encog\MathUtil\BoundNumbers\TOO_SMALL) {
+		return \Encog\MathUtil\BoundNumbers\TOO_SMALL;
+	} else if ($d > \Encog\MathUtil\BoundNumbers\TOO_BIG) {
+		return \Encog\MathUtil\BoundNumbers\TOO_BIG;
+	} else {
+		return $d;
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Encog(tm) Core v3.3 - PHP Version
  * https://github.com/katrinaniolet/encog-php-core
@@ -25,28 +26,30 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Test\Neural\Activation;
 
-use \Encog\Engine\Network\Activation\ActivationGaussian;
+use \Encog\Engine\Network\Activation\ActivationLOG;
 
-require_once("\Engine\Network\Activation\ActivationGaussian.php");
+require_once ("Engine/Network/Activation/ActivationLOG.php");
 
-class TestActivationGaussian extends \PHPUnit_Framework_TestCase {
+class TestActivationLOG extends \PHPUnit_Framework_TestCase {
 
-	public function testGaussian()
-	{
-		$activation = new ActivationGaussian();
-		$this->assertFalse(!$activation->hasDerivative());
-
-		$clone = clone($activation);
-		$this->assertNotNull($clone);
-
-		$input = [ 0.0  ];
-
-		$activation->activationFunction($input,0,count($input));
-
-		$this->assertEquals(1.0,$input[0],0.1);
-
+	public function testLog() {
+		$activation = new ActivationLOG();
+		$this->assertTrue( $activation->hasDerivative() );
+		
+		$clone = clone ($activation);
+		$this->assertNotNull( $clone );
+		
+		$input = [ 
+				0.0 ];
+		
+		$activation->activationFunction( $input, 0, count( $input ) );
+		
+		$this->assertEquals( 0.0, $input[0], 0.1 );
+		
+		// test derivative, should throw an error
+		$input[0] = $activation->derivativeFunction( $input[0], $input[0] );
+		$this->assertEquals( 1.0, $input[0], 0.1 );
 	}
 }

@@ -8,6 +8,8 @@
       <file>test/matrix/TestDecomp.php</file>
       <file>test/neural/data/bipolar/TestBiPolarNeuralData.php</file>
       <file>test/neural/activation/TestActivationBiPolar.php</file>
+      <file>test/neural/activation/TestActivationGaussian.php</file>
+      <file>test/neural/activation/TestActivationLOG.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
