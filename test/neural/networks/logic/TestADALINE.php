@@ -26,7 +26,7 @@
  * http://www.heatonresearch.com/copyright
  */
 
-namespace \Test\Neural\Networks\Logic;
+namespace Test\Neural\Networks\Logic;
 
 use \Encog\ML\Data\MLDataSet;
 use \Encog\ML\Data\Basic\BasicMLDataSet;

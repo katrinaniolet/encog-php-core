@@ -26,7 +26,7 @@
  * http://www.heatonresearch.com/copyright
  */
 
-namespace \Test\Neural\Networks\TestXOR;
+namespace Test\Neural\Networks\TestXOR;
 
 const XOR_INPUT = [[ 0.0, 0.0 ], [ 1.0, 0.0 ], [ 0.0, 1.0 ],
 [ 1.0, 1.0 ]];
