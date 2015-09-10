@@ -54,15 +54,9 @@ interface ActivationFunction {
 	 * the activation function being used. See the class description for more
 	 * specific information on this type of activation function.
 	 *
-	 * @param
-	 *        	double[] d
-	 *        	The input array to the activation function.
-	 * @param
-	 *        	int start
-	 *        	The starting index.
-	 * @param
-	 *        	int size
-	 *        	The number of values to calculate.
+	 * @param double[] $d The input array to the activation function.
+	 * @param int $start The starting index.
+	 * @param int $size The number of values to calculate.
 	 */
 	public function activationFunction( array &$d, $start, $size );
 
@@ -82,13 +76,9 @@ interface ActivationFunction {
 	 * and after the activation function is applied("a"), the class can be constructed
 	 * to use whichever value will be the most efficient.
 	 *
-	 * @param
-	 *        	double b
-	 *        	The number to calculate the derivative of, the number "before" the
-	 *        	activation function was applied.
-	 * @param
-	 *        	double a
-	 *        	The number "after" an activation function has been applied.
+	 * @param double $b The number to calculate the derivative of, the number "before" the
+	 * 		activation function was applied.
+	 * @param double $a The number "after" an activation function has been applied.
 	 * @return double The derivative.
 	 */
 	public function derivativeFunction( $b, $a );
@@ -108,10 +98,8 @@ interface ActivationFunction {
 	/**
 	 * Set one of the params for this activation function.
 	 *
-	 * @param
-	 *        	int index The index of the param to set.
-	 * @param
-	 *        	double value The value to set.
+	 * @param int $index The index of the param to set.
+	 * @param double $value The value to set.
 	 */
 	public function setParam( $index, $value );
 
