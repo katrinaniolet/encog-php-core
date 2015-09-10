@@ -8,7 +8,7 @@
  * https://github.com/encog/encog-java-core
  *
  * Copyright 2008-2014 Heaton Research, Inc.
- * PHP port by Katrina Niolet <katria@kf5utn.net>
+ * PHP port by Katrina Niolet <katrina@kf5utn.net>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

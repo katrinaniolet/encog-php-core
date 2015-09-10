@@ -5,7 +5,7 @@
  *
  * http://www.heatonresearch.com/encog/
  * https://github.com/encog/encog-java-core
-
+ *
  * Copyright 2008-2014 Heaton Research, Inc.
  * PHP port by Katrina Niolet <katrina@kf5utn.net>
  *
@@ -13,7 +13,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,24 +25,4 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-namespace Encog\Neural;
-use Encog\EncogError;
 
-require_once("EncogError.php");
-
-
-/**
- * Used by the neural network classes to indicate an error
- */
-class NeuralNetworkError extends EncogError {
-
-	/**
-	 * Construct this exception with a message.
-	 *
-	 * @param message
-	 *            The message for this exception.
-	 */
-	public function __construct( $message ) {
-		parent::__construct( $message );
-	}
-}

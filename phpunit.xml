@@ -11,6 +11,7 @@
       <file>test/neural/activation/TestActivationGaussian.php</file>
       <file>test/neural/activation/TestActivationLOG.php</file>
       <file>test/neural/activation/TestActivationLinear.php</file>
+      <file>test/neural/networks/logic/TestADALINE.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
