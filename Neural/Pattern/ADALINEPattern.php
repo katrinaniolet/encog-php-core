@@ -48,14 +48,14 @@ class ADALINEPattern implements NeuralNetworkPattern {
 	 * 
 	 * @var int
 	 */
-	private $inputNeurons;
+	private $inputNeurons = 0;
 	
 	/**
 	 * The number of neurons in the output layer.
 	 * 
 	 * @var int
 	 */
-	private $outputNeurons;
+	private $outputNeurons = 0;
 
 	/**
 	 * Not used, the ADALINE has no hidden layers, this will throw an error.
