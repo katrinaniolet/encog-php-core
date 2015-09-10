@@ -18,25 +18,32 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing pe/**
- * This interface allows various activation functions to be used with the neural
- * network. Activation functions are applied to the output from each layer of a
- * neural network. Activation functions scale the output into the desired range.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * Methods are provided both to process the activation function, as well as the
- * derivative of the function. Some training algorithms, particularly back
- * propagation, require that it be possible to take the derivative of the
- * activation function.
- *
- * Not all activation functions support derivatives. If you implement an
- * activation function that is not derivable then an exception should be thrown
- * inside of the derivativeFunction method implementation.
- *
- * Non-derivable activation functions are perfectly valid, they simply cannot be
- * used with every training algorithm.
+ * For more information on Heaton Research copyrights, licenses
+ * and trademarks visit:
+ * http://www.heatonresearch.com/copyright
  */
 namespace Encog\Engine\Network\Activation;
 
+/**
+* This interface allows various activation functions to be used with the neural
+* network. Activation functions are applied to the output from each layer of a
+* neural network. Activation functions scale the output into the desired range.
+*
+* Methods are provided both to process the activation function, as well as the
+* derivative of the function. Some training algorithms, particularly back
+* propagation, require that it be possible to take the derivative of the
+* activation function.
+*
+* Not all activation functions support derivatives. If you implement an
+* activation function that is not derivable then an exception should be thrown
+* inside of the derivativeFunction method implementation.
+*
+* Non-derivable activation functions are perfectly valid, they simply cannot be
+* used with every training algorithm.
+*/
 interface ActivationFunction {
 
 	/**
