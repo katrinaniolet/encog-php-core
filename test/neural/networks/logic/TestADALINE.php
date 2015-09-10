@@ -26,3 +26,30 @@
  * http://www.heatonresearch.com/copyright
  */
 
+namespace \Test\Neural\Networks\Logic;
+
+use \Encog\ML\Data\MLDataSet;
+use \Encog\ML\Data\Basic\BasicMLDataSet;
+use \Encog\ML\Train\MLTrain;
+use \Encog\Neural\Networks\BasicNetwork;
+use \Encog\Neural\Networks\NetworkUtil;
+use \Encog\Neural\Networks\Training\Simple\TrainAdaline;
+use \Encog\Neural\Pattern\ADALINEPattern;
+use \Test\Neural\Networks\TestXOR;
+
+class TestADALINE extends \PHPUnit_Framework_TestCase {
+
+	public function testAdalineNet() 
+	{
+		$pattern = new ADALINEPattern();
+		$pattern->setInputNeurons(2);
+		$pattern->setOutputNeurons(1);
+		$network = $pattern->generate();
+
+		// train it
+		$training = new BasicMLDataSet(TestXOR\XOR_INPUT,TestXOR\XOR_IDEAL);
+		$train = new TrainAdaline($network,$training,0.01);
+		NetworkUtil\testTraining($training,$train,0.01);
+	}
+
+}
