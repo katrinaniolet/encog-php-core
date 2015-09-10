@@ -10,6 +10,7 @@
       <file>test/neural/activation/TestActivationBiPolar.php</file>
       <file>test/neural/activation/TestActivationGaussian.php</file>
       <file>test/neural/activation/TestActivationLOG.php</file>
+      <file>test/neural/activation/TestActivationLinear.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
