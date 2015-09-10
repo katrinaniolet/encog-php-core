@@ -37,6 +37,8 @@ use \Encog\Neural\Networks\Training\Simple\TrainAdaline;
 use \Encog\Neural\Pattern\ADALINEPattern;
 use \Test\Neural\Networks\TestXOR;
 
+require_once("Neural/Pattern/ADALINEPattern.php");
+
 class TestADALINE extends \PHPUnit_Framework_TestCase {
 
 	public function testAdalineNet() 
