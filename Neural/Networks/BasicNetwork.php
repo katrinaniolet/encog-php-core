@@ -186,7 +186,7 @@ MLFactory {
 	 */
 	public function addLayer(Layer $layer) {
 		$layer->setNetwork($this);
-		$this->structure->getLayers().add($layer);
+		$this->structure->getLayers()->add($layer);
 	}
 
 	/**
