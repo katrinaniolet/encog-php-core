@@ -149,15 +149,15 @@ class NeuralStructure {
 	 */
 	public function finalizeStructure() {
 
-		if ($this->layers->size() < 2) {
+		if (count($this->layers) < 2) {
 			throw new NeuralNetworkError(
 					"There must be at least two layers before the structure is finalized.");
 		}
 
 		$flatLayers = array();
 
-		for ($i = 0; $i < $this->layers->size(); ++$i) {
-			$layer = $this->layers->get($i);
+		for ($i = 0; $i < count($this->layers); ++$i) {
+			$layer = $this->layers[$i];
 			if ($layer->getActivation() == null) {
 				$layer->setActivation(new ActivationLinear());
 			}
@@ -168,7 +168,7 @@ class NeuralStructure {
 		$this->flat = new FlatNetwork($flatLayers);
 
 		$this->finalizeLimit();
-		$this->layers->clear();
+		$this->layers = array();
 		$this->enforceLimit();
 	}
 
@@ -188,9 +188,9 @@ class NeuralStructure {
 	}
 
 	/**
-	 * @return Layer[] The layers in this neural network.
+	 * @return &Layer[] The layers in this neural network.
 	 */
-	public function getLayers() {
+	public function &getLayers() {
 		return $this->layers;
 	}
 

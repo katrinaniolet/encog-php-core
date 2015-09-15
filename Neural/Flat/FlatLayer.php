@@ -31,6 +31,8 @@ namespace Encog\Neural\Flat;
 use \Encog;
 use \Encog\Engine\Network\Activation\ActivationFunction;
 
+require_once("Encog.php");
+
 require_once ("Engine\Network\Activation\ActivationFunction.php");
 
 /**

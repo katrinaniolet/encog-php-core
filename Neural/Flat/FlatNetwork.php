@@ -67,14 +67,14 @@ class FlatNetwork {
 	
 	/**
 	 * The number of input neurons in this network.
-	 * 
+	 *
 	 * @var int intputCount
 	 */
 	private $inputCount = 0;
 	
 	/**
 	 * The number of neurons in each of the layers.
-	 * 
+	 *
 	 * @var int[] layerCounts
 	 */
 	private $layerCounts = array();
@@ -83,7 +83,7 @@ class FlatNetwork {
 	 * The number of context neurons in each layer.
 	 * These context neurons will
 	 * feed the next layer.
-	 * 
+	 *
 	 * @var int[] layerContextCount
 	 */
 	private $layerContextCount = array();
@@ -93,7 +93,7 @@ class FlatNetwork {
 	 * the previous layer.
 	 * Bias neurons, as well as context neurons, are not fed
 	 * from the previous layer.
-	 * 
+	 *
 	 * @var int[] layerFeedCounts
 	 */
 	private $layerFeedCounts = array();
@@ -101,49 +101,49 @@ class FlatNetwork {
 	/**
 	 * An index to where each layer begins (based on the number of neurons in
 	 * each layer).
-	 * 
+	 *
 	 * @var int[] layerIndex
 	 */
 	private $layerIndex = array();
 	
 	/**
 	 * The outputs from each of the neurons.
-	 * 
+	 *
 	 * @var double[] layerinput
 	 */
 	private $layerOutput = array();
 	
 	/**
 	 * The sum of the layer, before the activation function is applied, producing the layerOutput.
-	 * 
+	 *
 	 * @var double[] layerSums
 	 */
 	private $layerSums = array();
 	
 	/**
 	 * The number of output neurons in this network.
-	 * 
+	 *
 	 * @var int outputCount
 	 */
 	private $outputCount = 0;
 	
 	/**
 	 * The index to where the weights that are stored at for a given layer.
-	 * 
+	 *
 	 * @var int[] weightIndex
 	 */
 	private $weightIndex = array();
 	
 	/**
 	 * The weights for a neural network.
-	 * 
+	 *
 	 * @var double[] weights
 	 */
 	private $weights = array();
 	
 	/**
 	 * The activation types.
-	 * 
+	 *
 	 * @var ActivationFunction[] activationFunction
 	 */
 	private $activationFunctions = array();
@@ -154,7 +154,7 @@ class FlatNetwork {
 	 * are formed for the recurrent neural network. Each layer either has a
 	 * zero, which means no context target, or a layer number that indicates the
 	 * target layer.
-	 * 
+	 *
 	 * @var int[] contextTargetOffset
 	 */
 	private $contextTargetOffset = array();
@@ -164,7 +164,7 @@ class FlatNetwork {
 	 * If a layer's contextTargetOffset
 	 * is zero, its contextTargetSize should also be zero. The contextTargetSize
 	 * should always match the feed count of the targeted context layer.
-	 * 
+	 *
 	 * @var int[] contextTargetSize
 	 */
 	private $contextTargetSize = array();
@@ -173,67 +173,45 @@ class FlatNetwork {
 	 * The bias activation for each layer.
 	 * This is usually either 1, for a bias,
 	 * or zero for no bias.
-	 * 
+	 *
 	 * @var double[] biasActivation
 	 */
 	private $biasActivation = array();
 	
 	/**
 	 * The layer that training should begin on.
-	 * 
+	 *
 	 * @var int beginTraining
 	 */
 	private $beginTraining = 0;
 	
 	/**
 	 * The layer that training should end on.
-	 * 
+	 *
 	 * @var int endTraining
 	 */
 	private $endTraining = 0;
 	
 	/**
 	 * Does this network have some connections disabled.
-	 * 
+	 *
 	 * @var bool isLimited
 	 */
 	private $isLimited = false;
 	
 	/**
 	 * The limit, under which, all a cconnection is not considered to exist.
-	 * 
+	 *
 	 * @var double connectionLimit
 	 */
 	private $connectionLimit = 0;
 	
 	/**
 	 * True if the network has context.
-	 * 
+	 *
 	 * @var bool hasContext
 	 */
 	private $hasContext = false;
-
-	/**
-	 * Default constructor.
-	 */
-	/**
-	 * TODO(katrina) public FlatNetwork() {
-	 *
-	 * }
-	 */
-	
-	/**
-	 * Create a flat network from an array of layers.
-	 *
-	 * @param
-	 *        	layers
-	 *        	The layers.
-	 */
-	/**
-	 * TODO(katrina) public FlatNetwork(final FlatLayer[] layers) {
-	 * init(layers);
-	 * }
-	 */
 	
 	/**
 	 * Construct a flat neural network.
@@ -256,35 +234,44 @@ class FlatNetwork {
 	 *        	bool tanh
 	 *        	True if this is a tanh activation, false for sigmoid.
 	 */
-	public function __construct( $input, $hidden1, $hidden2, $output, $tanh ) {
-		$linearAct = new ActivationLinear();
-		$layers = array();
-		$act = $tanh ? new ActivationTANH() : new ActivationSigmoid();
-		
-		if( ($hidden1 == 0) && ($hidden2 == 0) ) {
-			$layers = array();
-			$layers[0] = new FlatLayer( $linearAct, $input, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
-			$layers[1] = new FlatLayer( $act, $output, FlatNetwork::NO_BIAS_ACTIVATION );
+	public function __construct( $input = null, $hidden1 = null, $hidden2 = null, $output = null, $tanh = null ) {
+		if( is_null( $input ) ) {
+			// do nothing
 		}
-		else if( ($hidden1 == 0) || ($hidden2 == 0) ) {
-			$count = \max( $hidden1, $hidden2 );
-			$layers = array();
-			$layers[0] = new FlatLayer( $linearAct, $input, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
-			$layers[1] = new FlatLayer( $act, $count, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
-			$layers[2] = new FlatLayer( $act, $output, FlatNetwork::NO_BIAS_ACTIVATION );
+		else if( is_array( $input ) ) {
+			$this->init( $input );
 		}
 		else {
+			assert( $input != null && $hidden1 != null && $hidden2 != null && $output != null && tanh != null, "invalid call to FlatNetwork constructor" );
+			$linearAct = new ActivationLinear();
 			$layers = array();
-			$layers[0] = new FlatLayer( $linearAct, $input, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
-			$layers[1] = new FlatLayer( $act, $hidden1, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
-			$layers[2] = new FlatLayer( $act, $hidden2, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
-			$layers[3] = new FlatLayer( $act, $output, FlatNetwork::NO_BIAS_ACTIVATION );
+			$act = $tanh ? new ActivationTANH() : new ActivationSigmoid();
+			
+			if( ($hidden1 == 0) && ($hidden2 == 0) ) {
+				$layers = array();
+				$layers[0] = new FlatLayer( $linearAct, $input, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
+				$layers[1] = new FlatLayer( $act, $output, FlatNetwork::NO_BIAS_ACTIVATION );
+			}
+			else if( ($hidden1 == 0) || ($hidden2 == 0) ) {
+				$count = \max( $hidden1, $hidden2 );
+				$layers = array();
+				$layers[0] = new FlatLayer( $linearAct, $input, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
+				$layers[1] = new FlatLayer( $act, $count, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
+				$layers[2] = new FlatLayer( $act, $output, FlatNetwork::NO_BIAS_ACTIVATION );
+			}
+			else {
+				$layers = array();
+				$layers[0] = new FlatLayer( $linearAct, $input, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
+				$layers[1] = new FlatLayer( $act, $hidden1, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
+				$layers[2] = new FlatLayer( $act, $hidden2, FlatNetwork::DEFAULT_BIAS_ACTIVATION );
+				$layers[3] = new FlatLayer( $act, $output, FlatNetwork::NO_BIAS_ACTIVATION );
+			}
+			
+			$this->isLimited = false;
+			$this->connectionLimit = 0.0;
+			
+			$this->init( $layers );
 		}
-		
-		$this->isLimited = false;
-		$this->connectionLimit = 0.0;
-		
-		$this->init( $layers );
 	}
 
 	/**
@@ -740,7 +727,7 @@ class FlatNetwork {
 		$this->layerOutput = array_fill( 0, $weightCount, 0.0 );
 		$this->layerSums = array_fill( 0, $weightCount, 0.0 );
 		
-		clearContext();
+		$this->clearContext();
 	}
 
 	/**
@@ -780,7 +767,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the activation functions.
-	 * 
+	 *
 	 * @param
 	 *        	ActivationFunction[] af The activation functions.
 	 */
@@ -800,7 +787,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the bias activation.
-	 * 
+	 *
 	 * @param
 	 *        	double[] biasActivation The bias activation.
 	 */
@@ -823,7 +810,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the context target offset.
-	 * 
+	 *
 	 * @param
 	 *        	int[] contextTargetOffset The context target offset.
 	 */
@@ -833,7 +820,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the context target size.
-	 * 
+	 *
 	 * @param
 	 *        	int[] contextTargetSize The context target size.
 	 */
@@ -853,7 +840,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the hasContext property.
-	 * 
+	 *
 	 * @param
 	 *        	bool hasContext True if the network has context.
 	 */
@@ -863,7 +850,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the input count.
-	 * 
+	 *
 	 * @param
 	 *        	int inputCount The input count.
 	 */
@@ -873,7 +860,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the layer context count.
-	 * 
+	 *
 	 * @param
 	 *        	int[] layerContextCount The layer context count.
 	 */
@@ -883,7 +870,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the layer counts.
-	 * 
+	 *
 	 * @param
 	 *        	int[] layerCounts The layer counts.
 	 */
@@ -897,7 +884,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the layer index.
-	 * 
+	 *
 	 * @param
 	 *        	int[] i The layer index.
 	 */
@@ -907,7 +894,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the layer output.
-	 * 
+	 *
 	 * @param
 	 *        	double[] layerOutput The layer output.
 	 */
@@ -917,7 +904,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the output count.
-	 * 
+	 *
 	 * @param
 	 *        	int outputCount The output count.
 	 */
@@ -927,7 +914,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the weight index.
-	 * 
+	 *
 	 * @param
 	 *        	int[] weightIndex The weight index.
 	 */
@@ -937,7 +924,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the weights.
-	 * 
+	 *
 	 * @param
 	 *        	double[] weights The weights.
 	 */
@@ -955,7 +942,7 @@ class FlatNetwork {
 
 	/**
 	 * Set the layer sums.
-	 * 
+	 *
 	 * @param
 	 *        	double[] d The layer sums.
 	 */

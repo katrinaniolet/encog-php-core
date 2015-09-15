@@ -26,106 +26,122 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\ML;
 
 use \Encog\Encog;
 use \Encog\Util\CSV\CSVFormat;
 
-require_once("ML/MLProperties.php");
+require_once ("ML/MLProperties.php");
+
 /**
  * A class that provides basic property functionality for the MLProperties
  * interface.
  */
 abstract class BasicML implements MLMethod, MLProperties {
-
+	
 	/**
-	 * Properties about the neural network. Some NeuralLogic classes require
+	 * Properties about the neural network.
+	 * Some NeuralLogic classes require
 	 * certain properties to be set.
+	 * 
 	 * @var string[string]
 	 */
 	private $properties = array();
 
 	/**
-	 * @return string[string] A map of all properties.
-	*/
-	public function getProperties() {
+	 *
+	 * @return &string[string] A map of all properties.
+	 */
+	public function &getProperties() {
 		return $this->properties;
 	}
 
 	/**
 	 * Get the specified property as a double.
 	 *
-	 * @param string name
-	 *            The name of the property.
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
 	 * @return double The property as a double.
 	 */
-	public function getPropertyDouble($name) {
-		return doubleval($this->properties->get($name));
+	public function getPropertyDouble( $name ) {
+		if(!array_key_exists($name, $this->properties))
+				return null;
+		return doubleval( $this->properties[$name] );
 	}
 
 	/**
 	 * Get the specified property as a long.
 	 *
-	 * @param string name
-	 *            The name of the specified property.
+	 * @param
+	 *        	string name
+	 *        	The name of the specified property.
 	 * @return long The value of the specified property.
 	 */
-	public function getPropertyLong($name) {
-		return intval($this->properties->get($name));
+	public function getPropertyLong( $name ) {
+		if(!array_key_exists($name, $this->properties))
+				return null;
+		return intval( $this->properties[$name] );
 	}
 
 	/**
 	 * Get the specified property as a string.
 	 *
-	 * @param string name
-	 *            The name of the property.
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
 	 * @return string The value of the property.
 	 */
-	public function getPropertyString($name) {
-		return $this->properties->get($name);
+	public function getPropertyString( $name ) {
+		if(!array_key_exists($name, $this->properties))
+				return null;
+		return $this->properties[$name];
 	}
 
 	/**
 	 * Set a property as a double.
 	 *
-	 * @param string name
-	 *            The name of the property.
-	 * @param double d
-	 *            The value of the property.
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
+	 * @param
+	 *        	double d
+	 *        	The value of the property.
 	 */
-	public function setProperty($name, $d) {
-		$this->properties->put($name,
-				"" . CSVFormat::$EG_FORMAT->format($d, Encog\DEFAULT_PRECISION));
+	public function setProperty( $name, $d ) {
+		$this->properties[$name] = strval( CSVFormat::$EG_FORMAT->format( $d, Encog\DEFAULT_PRECISION ) );
 		updateProperties();
 	}
 
 	/**
 	 * Set a property as a long.
 	 *
-	 * @param string name
-	 *            The name of the property.
-	 * @param long l
-	 *            The value of the property.
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
+	 * @param
+	 *        	long l
+	 *        	The value of the property.
 	 */
-	public function setPropertyLong($name, $l) {
-		$this->properties->put($name, strval($l));
+	public function setPropertyLong( $name, $l ) {
+		$this->properties[$name] = strval( $l );
 		$this->updateProperties();
 	}
 
 	/**
 	 * Set a property as a double.
 	 *
-	 * @param string name
-	 *            The name of the property.
-	 * @param string value
-	 *            The value of the property.
+	 * @param
+	 *        	string name
+	 *        	The name of the property.
+	 * @param
+	 *        	string value
+	 *        	The value of the property.
 	 */
-	public function setPropertyDouble($name, $value) {
-		$this->properties->put($name, $value);
+	public function setPropertyDouble( $name, $value ) {
+		$this->properties[$name] =  strval($value);
 		$this->updateProperties();
 	}
 
 	public abstract function updateProperties();
-
 }
