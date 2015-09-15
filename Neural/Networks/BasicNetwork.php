@@ -62,6 +62,9 @@ use \Encog\Util\CSV\NumberList;
 use \Encog\Util\Obj\ObjectCloner;
 use \Encog\Util\Simple\EncogUtility;
 
+require_once("ML/BasicML.php");
+require_once("Neural/Networks/ContainsFlat.php");
+
 /**
  * This class implements a neural network. This class works in conjunction the
  * Layer classes. Layers are added to the BasicNetwork to specify the structure

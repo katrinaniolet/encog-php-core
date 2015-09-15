@@ -79,7 +79,7 @@ interface MLProperties extends MLMethod {
 	 *        	double d
 	 *        	The value of the property.
 	 */
-	public function setProperty( $name, $d );
+	public function setPropertyDouble( $name, $d );
 
 	/**
 	 * Set a property as a long.
@@ -91,7 +91,7 @@ interface MLProperties extends MLMethod {
 	 *        	long l
 	 *        	The value of the property.
 	 */
-	public function setProperty( $name, $l );
+	public function setPropertyLong( $name, $l );
 
 	/**
 	 * Set a property as a double.
