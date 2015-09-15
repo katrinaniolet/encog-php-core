@@ -259,7 +259,7 @@ MLFactory {
 	 * @param double[] output
 	 *            The output.
 	 */
-	public function compute(array $input, array &$output) {
+	public function computeArray(array $input, array &$output) {
 		$input2 = new BasicMLData($input);
 		$output2 = $this->compute($input2);
 		EngineArray\arrayCopy($output2->getData(), $output);
@@ -665,7 +665,7 @@ MLFactory {
 	 * @param int seen
 	 *
 	 */
-	public function reset($seed) {
+	public function resetWithSeed($seed) {
 		(new ConsistentRandomizer(-1, 1, $seed))->randomize($this);
 	}
 
@@ -684,10 +684,10 @@ MLFactory {
 
 		for ($i = 0; i < $this->getLayerCount(); ++$i) {
 			$af = getActivation($i);
-			if ($af->getClass() != ActivationSigmoid
-					$$ $af->getClass() != ActivationTANH
-					&& $af->getClass() != ActivationElliott
-					&& $af->getClass() != ActivationElliottSymmetric) {
+			if ((!$af instanceof ActivationSigmoid)
+					&& (!$af instanceof ActivationTANH)
+					&& (!$af instanceof ActivationElliott)
+					&& (!$af instanceof ActivationElliottSymmetric)) {
 						$useNWR = false;
 					}
 		}

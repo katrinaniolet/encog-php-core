@@ -37,6 +37,7 @@ use \Encog\Neural\Networks\Layers\BasicLayer;
 use \Encog\Neural\Networks\Layers\Layer;
 
 require_once ("Neural\Pattern\NeuralNetworkPattern.php");
+require_once ("Neural\Networks\BasicNetwork.php");
 
 /**
  * Construct an ADALINE neural network.
