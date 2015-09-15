@@ -71,6 +71,7 @@ require_once("ML/MLResettable.php");
 require_once("ML/MLClassification.php");
 require_once("ML/MLError.php");
 require_once("ML/MLFactory.php");
+require_once("Neural/Networks/Structure/NeuralStructure.php");
 
 /**
  * This class implements a neural network. This class works in conjunction the
