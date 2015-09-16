@@ -99,9 +99,20 @@ class BasicMLDataSet implements MLDataSet {
 	 * @param double[][] ideal
 	 *            The ideal output for training.
 	 */
-	public function __construct(array $input, array $ideal) {
-		if ($ideal != null) {
-			for ($i = 0; i < count($input); ++$i) {
+	/**
+	 * Construct a data set from an already created list. Mostly used to
+	 * duplicate this class.
+	 *
+	 * @param &MLDataPair[] theData
+	 *            The data to use.
+	 */
+	//TODO(katrina) documentation, merged methods
+	public function __construct(array &$input, array $ideal = null) {
+		if(is_null($ideal) && (count($input)>0) && ($input[0] instanceof MLDataPair)) {
+			$this->data = &$input;
+		}
+		else if ($ideal != null) {
+			for ($i = 0; $i < count($input); ++$i) {
 				$inputData = new BasicMLData($input[$i]);
 				$idealData = new BasicMLData($ideal[$i]);
 				$this->add($inputData, $idealData);
@@ -112,17 +123,6 @@ class BasicMLDataSet implements MLDataSet {
 				$this->add($inputData);
 			}
 		}
-	}
-
-	/**
-	 * Construct a data set from an already created list. Mostly used to
-	 * duplicate this class.
-	 *
-	 * @param &MLDataPair[] theData
-	 *            The data to use.
-	 */
-	public function __construct(array &$theData) {
-		$this->data = &$theData;
 	}
 
 	/**
@@ -157,24 +157,14 @@ class BasicMLDataSet implements MLDataSet {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function add(MLData $theData) {
-		array_push($this->data,new BasicMLDataPair(theData));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function add(MLData $inputData, MLData $idealData) {
-
-		$pair = new BasicMLDataPair($inputData, $idealData);
-		$this->data->add($pair);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function add(MLDataPair $inputData) {
-		$this->data->add($inputData);
+	public function add($inputData, MLData $idealData = null) {
+		if($inputData instanceof MLData) {
+			$pair = new BasicMLDataPair($inputData, $idealData);
+			array_push($this->data,$pair);
+		}
+		else if($inputData instanceof MLDataPair) {
+			array_push($this->data,$inputData);
+		}
 	}
 
 	/**

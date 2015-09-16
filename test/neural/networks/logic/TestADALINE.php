@@ -38,6 +38,8 @@ use \Encog\Neural\Pattern\ADALINEPattern;
 use \Test\Neural\Networks\TestXOR;
 
 require_once ("Neural/Pattern/ADALINEPattern.php");
+require_once ("ML/Data/Basic/BasicMLDataSet.php");
+require_once ("test/neural/networks/TestXOR.php");
 
 class TestADALINE extends \PHPUnit_Framework_TestCase {
 
@@ -48,7 +50,7 @@ class TestADALINE extends \PHPUnit_Framework_TestCase {
 		$network = $pattern->generate();
 		
 		// train it
-		$training = new BasicMLDataSet( TestXOR\XOR_INPUT, TestXOR\XOR_IDEAL );
+		$training = new BasicMLDataSet( TestXOR\XOR_INPUT(), TestXOR\XOR_IDEAL() );
 		$train = new TrainAdaline( $network, $training, 0.01 );
 		NetworkUtil\testTraining( $training, $train, 0.01 );
 	}

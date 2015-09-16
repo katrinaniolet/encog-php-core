@@ -28,7 +28,7 @@
  */
 namespace Test\Neural\Networks\TestXOR;
 
-const XOR_INPUT = [ 
+$XOR_INPUT = [ 
 		[ 
 				0.0,
 				0.0 ],
@@ -41,7 +41,7 @@ const XOR_INPUT = [
 		[ 
 				1.0,
 				1.0 ] ];
-const XOR_IDEAL = [ 
+$XOR_IDEAL = [ 
 		[ 
 				0.0 ],
 		[ 
@@ -50,7 +50,7 @@ const XOR_IDEAL = [
 				1.0 ],
 		[ 
 				0.0 ] ];
-const XOR_IDEAL2 = [ 
+$XOR_IDEAL2 = [ 
 		[ 
 				1.0,
 				0.0 ],
@@ -63,6 +63,34 @@ const XOR_IDEAL2 = [
 		[ 
 				0.0,
 				1.0 ] ];
+
+function XOR_INPUT() {
+	return [ 
+		[ 
+				0.0,
+				0.0 ],
+		[ 
+				1.0,
+				0.0 ],
+		[ 
+				0.0,
+				1.0 ],
+		[ 
+				1.0,
+				1.0 ] ];
+}
+
+function XOR_IDEAL() {
+	return [ 
+		[ 
+				0.0 ],
+		[ 
+				1.0 ],
+		[ 
+				1.0 ],
+		[ 
+				0.0 ] ];
+}
 
 /**
  *
@@ -73,12 +101,12 @@ const XOR_IDEAL2 = [
  * @return bool
  */
 function verifyXOR( MLRegression $network, $tolerance ) {
-	for( $trainingSet = 0; $trainingSet < count( XOR_IDEAL ); ++$trainingSet ) {
-		$actual = $network->compute(new BasicMLData(XOR_INPUT[$trainingSet]));
+	for( $trainingSet = 0; $trainingSet < count( $XOR_IDEAL ); ++$trainingSet ) {
+		$actual = $network->compute(new BasicMLData($XOR_INPUT[$trainingSet]));
 
-		for($i=0;$i<count(XOR_IDEAL[0]);++$i)
+		for($i=0;$i<count($XOR_IDEAL[0]);++$i)
 		{
-			$diff = \abs($actual->getData($i)-XOR_IDEAL[$trainingSet][$i]);
+			$diff = \abs($actual->getData($i)-$XOR_IDEAL[$trainingSet][$i]);
 			if( $diff > $tolerance )
 				return false;
 		}
@@ -98,16 +126,16 @@ function createXORDataSet() {
 function testXORDataSet( MLDataSet $set ) {
 	$row = 0;
 	foreach( $set as $item ) {
-		for($i=0;$i<count(XOR_INPUT[0]);++$i)
+		for($i=0;$i<count($XOR_INPUT[0]);++$i)
 		{
 			$this->assertEquals($item->getInput()->getData($i),
-					XOR_INPUT[$row][$i]);
+					$XOR_INPUT[$row][$i]);
 		}
 
-		for($i=0;$i<count(XOR_IDEAL[0]);++$i)
+		for($i=0;$i<count($XOR_IDEAL[0]);++$i)
 		{
 			$this->assertEquals($item->getIdeal()->getData($i),
-					XOR_IDEAL[$row][$i]);
+					$XOR_IDEAL[$row][$i]);
 		}
 		
 		++$row;
@@ -158,7 +186,7 @@ function createUnTrainedXOR() {
 			0.81815044327334,
 			0.648991753485689 ];
 	$network = EncogUtility\simpleFeedForward( 2, 4, 0, 1, false );
-	$NetworkCODEC\arrayToNetwork( $TRAINED_XOR_WEIGHTS, $network );
+	NetworkCODEC\arrayToNetwork( $TRAINED_XOR_WEIGHTS, $network );
 	return $network;
 }
 
@@ -176,8 +204,8 @@ function createNoisyXORDataSet( $count ) {
 	$result = new BasicMLDataSet();
 	for( $i = 0; $i < $count; ++$i ) {
 		for( $j = 0; $j < 4; ++$j ) {
-			$inputData = new BasicMLData(XOR_INPUT[$j]);
-			$idealData = new BasicMLData(XOR_IDEAL[$j]);
+			$inputData = new BasicMLData($XOR_INPUT[$j]);
+			$idealData = new BasicMLData($XOR_IDEAL[$j]);
 			$pair = new BasicMLDataPair( $inputData, $idealData );
 			$inputData->setData( 0, $inputData->getData( 0 ) + RangeRandomizer\randomize( - 0.1, 0.1 ) );
 			$inputData->setData( 1, $inputData->getData( 1 ) + RangeRandomizer\randomize( - 0.1, 0.1 ) );
