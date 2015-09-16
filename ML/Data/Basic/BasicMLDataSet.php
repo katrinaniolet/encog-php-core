@@ -280,7 +280,7 @@ class BasicMLDataSet implements MLDataSet {
 
 	/**
 	 * Concert the data set to a list.
-	 * 
+	 *
 	 * @param
 	 *        	theSet The data set to convert.
 	 * @return The list.

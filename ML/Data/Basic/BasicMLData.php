@@ -26,7 +26,6 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-
 namespace Encog\ML\Data\Basic;
 
 use \Encog\ML\Data\MLData;
@@ -37,9 +36,10 @@ use Encog\Util\KMmeans\Centroid;
  * array.
  */
 class BasicMLData implements MLData {
-
+	
 	/**
 	 * The data held by this object.
+	 * 
 	 * @var double[] data
 	 */
 	private $data = array();
@@ -47,31 +47,35 @@ class BasicMLData implements MLData {
 	/**
 	 * Construct this object with the specified data.
 	 *
-	 * @param d
-	 *            The data to construct this object with.
+	 * @param
+	 *        	d
+	 *        	The data to construct this object with.
 	 */
 	/**
 	 * Construct this object with blank data and a specified size.
 	 *
-	 * @param size
-	 *            The amount of data to store.
+	 * @param
+	 *        	size
+	 *        	The amount of data to store.
 	 */
 	/**
-	 * Construct a new BasicMLData object from an existing one. This makes a
+	 * Construct a new BasicMLData object from an existing one.
+	 * This makes a
 	 * copy of an array.
 	 *
-	 * @param d
-	 *            The object to be copied.
+	 * @param
+	 *        	d
+	 *        	The object to be copied.
 	 */
-	//TODO(katrina) documentation, merged methods
-	public function __construct($d) {
-		if(is_array($d)) {
+	// TODO(katrina) documentation, merged methods
+	public function __construct( $d ) {
+		if( is_array( $d ) ) {
 			$this->data = $d;
 		}
-		else if(is_numeric($d)) {
-			$this->data = array_fill(0,$d,0.0);
+		else if( is_numeric( $d ) ) {
+			$this->data = array_fill( 0, $d, 0.0 );
 		}
-		else if(is_object($d) && $d instanceof MLData) {
+		else if( is_object( $d ) && $d instanceof MLData ) {
 			$this->data = $d->getData();
 		}
 	}
@@ -79,7 +83,7 @@ class BasicMLData implements MLData {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function add($index, $value) {
+	public function add( $index, $value ) {
 		$this->data[$index] += $value;
 	}
 
@@ -87,7 +91,7 @@ class BasicMLData implements MLData {
 	 * {@inheritDoc}
 	 */
 	public function clear() {
-		for ($i = 0; $i < count($this->data); ++$i) {
+		for( $i = 0; $i < count( $this->data ); ++$i ) {
 			$this->data[$i] = 0;
 		}
 	}
@@ -96,14 +100,14 @@ class BasicMLData implements MLData {
 	 * {@inheritDoc}
 	 */
 	public function __clone() {
-		return new BasicMLData($this);
+		return new BasicMLData( $this );
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getData($index = -1) {
-		if(is_null($index))
+	public function getData( $index = -1 ) {
+		if( is_null( $index ) )
 			return $this->data;
 		return $this->data[$index];
 	}
@@ -111,14 +115,14 @@ class BasicMLData implements MLData {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setDataFromArray(array $theData) {
+	public function setDataFromArray( array $theData ) {
 		$this->data = $theData;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setData($index, $d) {
+	public function setData( $index, $d ) {
 		$this->data[$index] = $d;
 	}
 
@@ -126,7 +130,7 @@ class BasicMLData implements MLData {
 	 * {@inheritDoc}
 	 */
 	public function size() {
-		return count($this->data);
+		return count( $this->data );
 	}
 
 	/**
@@ -136,8 +140,8 @@ class BasicMLData implements MLData {
 		$builder = "[";
 		$builder .= $this->getClass()->getSimpleName();
 		$builder .= ":";
-		for ($i = 0; $i < count($this->data); ++$i) {
-			if ($i != 0) {
+		for( $i = 0; $i < count( $this->data ); ++$i ) {
+			if( $i != 0 ) {
 				$builder .= ',';
 			}
 			$builder .= $this->data[$i];
@@ -150,73 +154,83 @@ class BasicMLData implements MLData {
 	 * {@inheritDoc}
 	 */
 	public function createCentroid() {
-		return new BasicMLDataCentroid($this);
+		return new BasicMLDataCentroid( $this );
 	}
 
 	/**
-	 * Add one data element to another.  This does not modify the object.
-	 * @param MLData o The other data element
+	 * Add one data element to another.
+	 * This does not modify the object.
+	 * 
+	 * @param
+	 *        	MLData o The other data element
 	 * @return MLData The result.
 	 */
-	public function plus(MLData $o)
-	{
-		if ($this->size() != $o->size())
+	public function plus( MLData $o ) {
+		if( $this->size() != $o->size() )
 			throw new IllegalArgumentException();
-
-		$result = new BasicMLData($this->size());
-		for ($i = 0; $i < $this->size(); ++$i)
-			$result->setData($i, $this->getData($i) + $o->getData($i));
-
+		
+		$result = new BasicMLData( $this->size() );
+		for( $i = 0; $i < $this->size(); ++$i )
+			$result->setData( $i, $this->getData( $i ) + $o->getData( $i ) );
+		
 		return $result;
 	}
 
 	/**
-	 * Multiply one data element with another.  This does not modify the object.
-	 * @param double d The other data element
+	 * Multiply one data element with another.
+	 * This does not modify the object.
+	 * 
+	 * @param
+	 *        	double d The other data element
 	 * @return MLData The result.
 	 */
-	public function times($d)
-	{
-		$result = new BasicMLData($this->size());
-
-		for ($i = 0; $i < $this->size(); ++$i)
-			$result->setData($i, $this->getData($i) * $d);
-
+	public function times( $d ) {
+		$result = new BasicMLData( $this->size() );
+		
+		for( $i = 0; $i < $this->size(); ++$i )
+			$result->setData( $i, $this->getData( $i ) * $d );
+		
 		return $result;
 	}
 
 	/**
-	 * Subtract one data element from another.  This does not modify the object.
-	 * @param MLData o The other data element
+	 * Subtract one data element from another.
+	 * This does not modify the object.
+	 * 
+	 * @param
+	 *        	MLData o The other data element
 	 * @return MLData The result.
 	 */
-	public function minus(MLData $o)
-	{
-		if ($this->size() != $o->size())
+	public function minus( MLData $o ) {
+		if( $this->size() != $o->size() )
 			throw new IllegalArgumentException();
-
-		$result = new BasicMLData($this->size());
-		for ($i = 0; $i < $this->size(); ++$i)
-			$result->setData($i,  $this->getData($i) - $o->getData($i));
-
+		
+		$result = new BasicMLData( $this->size() );
+		for( $i = 0; $i < $this->size(); ++$i )
+			$result->setData( $i, $this->getData( $i ) - $o->getData( $i ) );
+		
 		return $result;
 	}
 
 	/**
-	 * Apply a thresholding function to the data elements. This does not modify the object.
-	 * @param double thesdholdValue the value to which elements are compared
-	 * @param double lowValue the value to use if <= threshold
-	 * @param double highValue the value to use if > threshold
+	 * Apply a thresholding function to the data elements.
+	 * This does not modify the object.
+	 * 
+	 * @param
+	 *        	double thesdholdValue the value to which elements are compared
+	 * @param
+	 *        	double lowValue the value to use if <= threshold
+	 * @param
+	 *        	double highValue the value to use if > threshold
 	 * @return MLData The result.
 	 */
-	public function threshold($thresholdValue, $lowValue, $highValue)
-	{
-		$result = new BasicMLData($size());
-		for ($i = 0; $i < $this->size(); ++$i)
-			if ($this->getData($i) > $thresholdValue)
-				$result->setData($i,$highValue);
+	public function threshold( $thresholdValue, $lowValue, $highValue ) {
+		$result = new BasicMLData( $size() );
+		for( $i = 0; $i < $this->size(); ++$i )
+			if( $this->getData( $i ) > $thresholdValue )
+				$result->setData( $i, $highValue );
 			else
-				$result->setData($i,$lowValue);
-			return $result;
+				$result->setData( $i, $lowValue );
+		return $result;
 	}
 }

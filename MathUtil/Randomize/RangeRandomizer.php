@@ -28,7 +28,7 @@
  */
 namespace Encog\MathUtil\Randomize;
 
-require_once("MathUtil/Randomize/BasicRandomizer.php");
+require_once ("MathUtil/Randomize/BasicRandomizer.php");
 
 /**
  * A randomizer that will create random weight and bias values that are between
@@ -38,41 +38,48 @@ class RangeRandomizer extends BasicRandomizer {
 
 	/**
 	 * Returns a random number in the range between min and max.
-	 * @param int min The minimum desired random number.
-	 * @param int max The maximum desired random number.
+	 * 
+	 * @param
+	 *        	int min The minimum desired random number.
+	 * @param
+	 *        	int max The maximum desired random number.
 	 * @return int The random number.
 	 */
-	public static function randomInt($min, $max) {
-		return intval(RangeRandomizer::randomizeRange($min, $max + 1));
+	public static function randomInt( $min, $max ) {
+		return intval( RangeRandomizer::randomizeRange( $min, $max + 1 ) );
 	}
 
 	/**
 	 * Generate a random number in the specified range.
 	 *
-	 * @param double min
-	 *            The minimum value.
-	 * @param double max
-	 *            The maximum value.
+	 * @param
+	 *        	double min
+	 *        	The minimum value.
+	 * @param
+	 *        	double max
+	 *        	The maximum value.
 	 * @return double A random number.
 	 */
-	public static function randomizeRange($min, $max) {
+	public static function randomizeRange( $min, $max ) {
 		$range = $max - $min;
 		return ($range * \random()) + $min;
 	}
 
-	public static function randomizeRandomRange($r, $min, $max) {
+	public static function randomizeRandomRange( $r, $min, $max ) {
 		$range = $max - $min;
 		return ($range * $r->nextDouble()) + $min;
 	}
-
+	
 	/**
 	 * The minimum value for the random range.
+	 * 
 	 * @var double min
 	 */
 	private $min = 0.0;
-
+	
 	/**
 	 * The maximum value for the random range.
+	 * 
 	 * @var double max
 	 */
 	private $max = 0.0;
@@ -80,12 +87,14 @@ class RangeRandomizer extends BasicRandomizer {
 	/**
 	 * Construct a range randomizer.
 	 *
-	 * @param double min
-	 *            The minimum random value.
-	 * @param double max
-	 *            The maximum random value.
+	 * @param
+	 *        	double min
+	 *        	The minimum random value.
+	 * @param
+	 *        	double max
+	 *        	The maximum random value.
 	 */
-	public function __construct($min, $max) {
+	public function __construct( $min, $max ) {
 		parent::__construct();
 		$this->max = $max;
 		$this->min = $min;
@@ -94,15 +103,17 @@ class RangeRandomizer extends BasicRandomizer {
 	/**
 	 * Generate a random number based on the range specified in the constructor.
 	 *
-	 * @param double d
-	 *            The range randomizer ignores this value.
+	 * @param
+	 *        	double d
+	 *        	The range randomizer ignores this value.
 	 * @return double The random number.
 	 */
-	public function randomizeDouble($d) {
-		return $this->nextDoubleRange($this->min, $this->max);
+	public function randomizeDouble( $d ) {
+		return $this->nextDoubleRange( $this->min, $this->max );
 	}
 
 	/**
+	 *
 	 * @return double the min
 	 */
 	public function getMin() {
@@ -110,10 +121,10 @@ class RangeRandomizer extends BasicRandomizer {
 	}
 
 	/**
+	 *
 	 * @return double the max
 	 */
 	public function getMax() {
 		return $this->max;
 	}
-
 }

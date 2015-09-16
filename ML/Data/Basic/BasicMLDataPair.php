@@ -28,15 +28,17 @@
  */
 namespace Encog\ML\Data\Basic;
 
-
 use \Encog\EncogError;
 use \Encog\ML\Data\MLData;
 use \Encog\ML\Data\MLDataPair;
 use \Encog\Util\Format;
 use \Encog\Util\KMeans\Centroid;
 
+require_once ("ML/Data/MLDataPair.php");
+
 /**
- * A basic implementation of the MLDataPair interface. This implementation
+ * A basic implementation of the MLDataPair interface.
+ * This implementation
  * simply holds and input and ideal MLData object.
  *
  * For supervised training both input and ideal should be specified.
@@ -45,7 +47,7 @@ use \Encog\Util\KMeans\Centroid;
  * ideal property should contain null.
  */
 class BasicMLDataPair implements MLDataPair {
-
+	
 	/**
 	 * The significance.
 	 */
@@ -53,58 +55,64 @@ class BasicMLDataPair implements MLDataPair {
 
 	/**
 	 * Create a new data pair object of the correct size for the machine
-	 * learning method that is being trained. This object will be passed to the
+	 * learning method that is being trained.
+	 * This object will be passed to the
 	 * getPair method to allow the data pair objects to be copied to it.
 	 *
-	 * @param int inputSize
-	 *            The size of the input data.
-	 * @param int idealSize
-	 *            The size of the ideal data.
+	 * @param
+	 *        	int inputSize
+	 *        	The size of the input data.
+	 * @param
+	 *        	int idealSize
+	 *        	The size of the ideal data.
 	 * @return MLDataPair A new data pair object.
 	 */
-	public static function createPair($inputSize,
-			$idealSize) {
+	public static function createPair( $inputSize, $idealSize ) {
 		$result = null;
-
-		if ($idealSize > 0) {
-			$result = new BasicMLDataPair(new BasicMLData($inputSize),
-					new BasicMLData($idealSize));
-		} else {
-			$result = new BasicMLDataPair(new BasicMLData($inputSize));
+		
+		if( $idealSize > 0 ) {
+			$result = new BasicMLDataPair( new BasicMLData( $inputSize ), new BasicMLData( $idealSize ) );
 		}
-
+		else {
+			$result = new BasicMLDataPair( new BasicMLData( $inputSize ) );
+		}
+		
 		return $result;
 	}
-
+	
 	/**
 	 * The the expected output from the machine learning method, or null for
 	 * unsupervised training.
 	 */
 	private $ideal = null;
-
+	
 	/**
 	 * The training input to the machine learning method.
 	 */
 	private $inpu = null;
 
 	/**
-	 * Construct the object with only input. If this constructor is used, then
+	 * Construct the object with only input.
+	 * If this constructor is used, then
 	 * unsupervised training is being used.
 	 *
-	 * @param MLData theInput
-	 *            The input to the machine learning method.
+	 * @param
+	 *        	MLData theInput
+	 *        	The input to the machine learning method.
 	 */
 	/**
 	 * Construct a BasicMLDataPair class with the specified input and ideal
 	 * values.
 	 *
-	 * @param theInput
-	 *            The input to the machine learning method.
-	 * @param theIdeal
-	 *            The expected results from the machine learning method.
+	 * @param
+	 *        	theInput
+	 *        	The input to the machine learning method.
+	 * @param
+	 *        	theIdeal
+	 *        	The expected results from the machine learning method.
 	 */
-	//TODO(katrina) documentation, merged methods
-	public function __construct(MLData $theInput, MLData $ideal = null) {
+	// TODO(katrina) documentation, merged methods
+	public function __construct( MLData $theInput, MLData $ideal = null ) {
 		$this->input = $theInput;
 		$this->ideal = $ideal;
 	}
@@ -120,7 +128,7 @@ class BasicMLDataPair implements MLDataPair {
 	 * {@inheritDoc}
 	 */
 	public function getIdealArray() {
-		if ($this->ideal == null) {
+		if( $this->ideal == null ) {
 			return null;
 		}
 		return $this->ideal->getData();
@@ -150,16 +158,15 @@ class BasicMLDataPair implements MLDataPair {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setIdealArray(array $data) {
-		$this->ideal->setData($data);
-
+	public function setIdealArray( array $data ) {
+		$this->ideal->setData( $data );
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setInputArray(array $data) {
-		$this->input->setData($data);
+	public function setInputArray( array $data ) {
+		$this->input->setData( $data );
 	}
 
 	/**
@@ -167,7 +174,7 @@ class BasicMLDataPair implements MLDataPair {
 	 */
 	public function toString() {
 		$builder = "[";
-		$builder .= get_class($this);
+		$builder .= get_class( $this );
 		$builder .= ":";
 		$builder .= "Input:";
 		$builder .= getInput();
@@ -175,7 +182,7 @@ class BasicMLDataPair implements MLDataPair {
 		$builder .= getIdeal();
 		$builder .= ",";
 		$builder .= "Significance:";
-		//TODO(katrina) format as percent
+		// TODO(katrina) format as percent
 		$builder .= $this->significance;
 		$builder .= "]";
 		return $builder;
@@ -191,7 +198,7 @@ class BasicMLDataPair implements MLDataPair {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setSignificance($significance) {
+	public function setSignificance( $significance ) {
 		$this->significance = $significance;
 	}
 
@@ -199,12 +206,9 @@ class BasicMLDataPair implements MLDataPair {
 	 * {@inheritDoc}
 	 */
 	public function createCentroid() {
-		if( !($this->input instanceof BasicMLData) ) {
-			throw new EncogError("The input data type of " + $this->input->getClass()->getSimpleName() + " must be BasicMLData.");
+		if( ! ($this->input instanceof BasicMLData) ) {
+			throw new EncogError( "The input data type of " + $this->input->getClass()->getSimpleName() + " must be BasicMLData." );
 		}
-		return new BasicMLDataPairCentroid($this);
+		return new BasicMLDataPairCentroid( $this );
 	}
-
-
-
 }

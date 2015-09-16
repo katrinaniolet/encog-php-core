@@ -66,30 +66,30 @@ $XOR_IDEAL2 = [
 
 function XOR_INPUT() {
 	return [ 
-		[ 
-				0.0,
-				0.0 ],
-		[ 
-				1.0,
-				0.0 ],
-		[ 
-				0.0,
-				1.0 ],
-		[ 
-				1.0,
-				1.0 ] ];
+			[ 
+					0.0,
+					0.0 ],
+			[ 
+					1.0,
+					0.0 ],
+			[ 
+					0.0,
+					1.0 ],
+			[ 
+					1.0,
+					1.0 ] ];
 }
 
 function XOR_IDEAL() {
 	return [ 
-		[ 
-				0.0 ],
-		[ 
-				1.0 ],
-		[ 
-				1.0 ],
-		[ 
-				0.0 ] ];
+			[ 
+					0.0 ],
+			[ 
+					1.0 ],
+			[ 
+					1.0 ],
+			[ 
+					0.0 ] ];
 }
 
 /**
@@ -102,11 +102,10 @@ function XOR_IDEAL() {
  */
 function verifyXOR( MLRegression $network, $tolerance ) {
 	for( $trainingSet = 0; $trainingSet < count( $XOR_IDEAL ); ++$trainingSet ) {
-		$actual = $network->compute(new BasicMLData($XOR_INPUT[$trainingSet]));
-
-		for($i=0;$i<count($XOR_IDEAL[0]);++$i)
-		{
-			$diff = \abs($actual->getData($i)-$XOR_IDEAL[$trainingSet][$i]);
+		$actual = $network->compute( new BasicMLData( $XOR_INPUT[$trainingSet] ) );
+		
+		for( $i = 0; $i < count( $XOR_IDEAL[0] ); ++$i ) {
+			$diff = \abs( $actual->getData( $i ) - $XOR_IDEAL[$trainingSet][$i] );
 			if( $diff > $tolerance )
 				return false;
 		}
@@ -126,16 +125,12 @@ function createXORDataSet() {
 function testXORDataSet( MLDataSet $set ) {
 	$row = 0;
 	foreach( $set as $item ) {
-		for($i=0;$i<count($XOR_INPUT[0]);++$i)
-		{
-			$this->assertEquals($item->getInput()->getData($i),
-					$XOR_INPUT[$row][$i]);
+		for( $i = 0; $i < count( $XOR_INPUT[0] ); ++$i ) {
+			$this->assertEquals( $item->getInput()->getData( $i ), $XOR_INPUT[$row][$i] );
 		}
-
-		for($i=0;$i<count($XOR_IDEAL[0]);++$i)
-		{
-			$this->assertEquals($item->getIdeal()->getData($i),
-					$XOR_IDEAL[$row][$i]);
+		
+		for( $i = 0; $i < count( $XOR_IDEAL[0] ); ++$i ) {
+			$this->assertEquals( $item->getIdeal()->getData( $i ), $XOR_IDEAL[$row][$i] );
 		}
 		
 		++$row;
@@ -204,8 +199,8 @@ function createNoisyXORDataSet( $count ) {
 	$result = new BasicMLDataSet();
 	for( $i = 0; $i < $count; ++$i ) {
 		for( $j = 0; $j < 4; ++$j ) {
-			$inputData = new BasicMLData($XOR_INPUT[$j]);
-			$idealData = new BasicMLData($XOR_IDEAL[$j]);
+			$inputData = new BasicMLData( $XOR_INPUT[$j] );
+			$idealData = new BasicMLData( $XOR_IDEAL[$j] );
 			$pair = new BasicMLDataPair( $inputData, $idealData );
 			$inputData->setData( 0, $inputData->getData( 0 ) + RangeRandomizer\randomize( - 0.1, 0.1 ) );
 			$inputData->setData( 1, $inputData->getData( 1 ) + RangeRandomizer\randomize( - 0.1, 0.1 ) );
