@@ -86,6 +86,7 @@ class RangeRandomizer extends BasicRandomizer {
 	 *            The maximum random value.
 	 */
 	public function __construct($min, $max) {
+		parent::__construct();
 		$this->max = $max;
 		$this->min = $min;
 	}

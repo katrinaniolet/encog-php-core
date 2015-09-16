@@ -93,7 +93,7 @@ class ADALINEPattern implements NeuralNetworkPattern {
 		$network->addLayer( $outputLayer );
 		$network->getStructure()->finalizeStructure();
 		
-		(new RangeRandomizer( - 0.5, 0.5 ))->randomize( $network );
+		(new RangeRandomizer( - 0.5, 0.5 ))->randomizeMLMethod( $network );
 		
 		return $network;
 	}

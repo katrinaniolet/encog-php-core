@@ -42,6 +42,7 @@ require_once("MathUtil/Randomize/Generate/MersenneTwisterGenerateRandom.php");
 require_once("ML/MLEncodable.php");
 require_once("ML/MLMethod.php");
 require_once("Neural/Networks/BasicNetwork.php");
+require_once("MathUtil/Randomize/Randomizer.php");
 
 /**
  * Provides basic functionality that most randomizers will need.

@@ -29,6 +29,8 @@
 
 namespace Encog\MathUtil\Randomize\Generate;
 
+require_once("MathUtil/Randomize/Generate/AbstractGenerateRandom.php");
+
 /**
  * Provides the ability for subclasses to generate normally distributed random numbers.
  */
