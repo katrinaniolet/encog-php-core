@@ -40,6 +40,10 @@ use \Encog\Neural\Networks\BasicNetwork;
 use \Encog\Neural\Networks\Training\LearningRate;
 use \Encog\Neural\Networks\Training\Propagation\TrainingContinuation;
 
+require_once("ML/Train/BasicTraining.php");
+require_once("ML/TrainingImplementationType.php");
+require_once("Neural/Networks/Training/LearningRate.php");
+
 /**
  * Train an ADALINE neural network.
  */
@@ -75,7 +79,7 @@ class TrainAdaline extends BasicTraining implements LearningRate {
 	 */
 	public function __construct(BasicNetwork $network, MLDataSet $training,
 			$learningRate) {
-		parent::__construct(TrainingImplementationType\Iterative);
+		parent::__construct(TrainingImplementationType::Iterative);
 		if($network->getLayerCount() > 2) {
 			throw new NeuralNetworkError(
 					"An ADALINE network only has two layers.");
@@ -110,7 +114,8 @@ class TrainAdaline extends BasicTraining implements LearningRate {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function iteration() {
+	public function iteration($count = null) {
+		assert(is_null($count));
 
 		$errorCalculation = new ErrorCalculation();
 

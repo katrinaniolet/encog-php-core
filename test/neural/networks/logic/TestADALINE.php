@@ -39,6 +39,8 @@ use \Test\Neural\Networks\TestXOR;
 
 require_once ("Neural/Pattern/ADALINEPattern.php");
 require_once ("ML/Data/Basic/BasicMLDataSet.php");
+require_once ("Neural/Networks/Training/Simple/TrainAdaline.php");
+require_once ("Neural/Networks/NetworkUtil.php");
 require_once ("test/neural/networks/TestXOR.php");
 
 class TestADALINE extends \PHPUnit_Framework_TestCase {
