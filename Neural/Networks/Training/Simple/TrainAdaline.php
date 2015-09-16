@@ -43,6 +43,7 @@ use \Encog\Neural\Networks\Training\Propagation\TrainingContinuation;
 require_once("ML/Train/BasicTraining.php");
 require_once("ML/TrainingImplementationType.php");
 require_once("Neural/Networks/Training/LearningRate.php");
+require_once("MathUtil/Error/ErrorCalculation.php");
 
 /**
  * Train an ADALINE neural network.
