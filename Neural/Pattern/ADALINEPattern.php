@@ -38,6 +38,7 @@ use \Encog\Neural\Networks\Layers\Layer;
 
 require_once ("Neural\Pattern\NeuralNetworkPattern.php");
 require_once ("Neural\Networks\BasicNetwork.php");
+require_once ("MathUtil\Randomize\RangeRandomizer.php");
 
 /**
  * Construct an ADALINE neural network.
