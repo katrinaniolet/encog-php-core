@@ -287,7 +287,7 @@ MLFactory {
 	public function compute(MLData $input) {
 		try {
 			$result = new BasicMLData($this->structure->getFlat()->getOutputCount());
-			$this->structure->getFlat()->compute($input->getData(), $result->getData());
+			$this->structure->getFlat()->computeArray($input->getData(), $result->getData());
 			return $result;
 		} catch (ArrayIndexOutOfBoundsException $ex) {
 			throw new NeuralNetworkError(

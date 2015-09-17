@@ -107,7 +107,7 @@ class BasicMLData implements MLData {
 	 * {@inheritDoc}
 	 */
 	public function getData( $index = -1 ) {
-		if( is_null( $index ) )
+		if( $index < 0 )
 			return $this->data;
 		return $this->data[$index];
 	}

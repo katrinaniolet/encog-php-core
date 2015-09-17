@@ -450,13 +450,13 @@ require_once("ML/Data/MLDataSet.php");
  * @param MLDataSet data
  * @return double
  */
-function calculateRegressionError(MLRegression $method, MLDataSet $data) {
+function calculateRegressionError(MLRegression $method, /*TODO(katrina) MLDataSet*/ $data) {
 
 	$errorCalculation = new ErrorCalculation();
 	if( $method instanceof MLContext )
 		$method->clearContext();
 
-	foreach ($data as $pair) {
+	foreach ($data->getData() as $pair) {
 		$actual = $method->compute($pair->getInput());
 		$errorCalculation->updateError($actual->getData(), $pair->getIdeal()
 				->getData(),$pair->getSignificance());

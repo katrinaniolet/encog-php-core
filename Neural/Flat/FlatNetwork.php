@@ -383,7 +383,7 @@ class FlatNetwork {
 	 *        	double[] output
 	 *        	Output will be placed here.
 	 */
-	public function computeArray( array $input, array $output ) {
+	public function computeArray( array $input, array &$output ) {
 		$sourceIndex = count( $this->layerOutput ) - $this->layerCounts[count( $this->layerCounts ) - 1];
 		
 		EngineArray\arrayCopy( $input, 0, $this->layerOutput, $sourceIndex, $this->inputCount );
