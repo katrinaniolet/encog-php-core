@@ -37,6 +37,7 @@ use \Encog\Util\Obj\ObjectCloner;
 
 require_once ("ML/Data/Basic/BasicMLData.php");
 require_once ("ML/Data/Basic/BasicMLDataPair.php");
+require_once ("ML/Data/MLDataSet.php");
 
 /**
  * An iterator to be used with the BasicMLDataSet.

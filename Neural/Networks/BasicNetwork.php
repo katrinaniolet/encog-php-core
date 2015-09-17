@@ -72,6 +72,7 @@ require_once("ML/MLClassification.php");
 require_once("ML/MLError.php");
 require_once("ML/MLFactory.php");
 require_once("Neural/Networks/Structure/NeuralStructure.php");
+require_once("Util/Simple/EncogUtility.php");
 
 /**
  * This class implements a neural network. This class works in conjunction the
@@ -218,7 +219,7 @@ MLFactory {
 	 * @return double The error percentage.
 	 */
 	public function calculateError(MLDataSet $data) {
-		return EncogUtility\calculateRegressionError($this, $data);
+		return EncogUtility\calculateRegressionError($this,$data);
 	}
 
 	/**
